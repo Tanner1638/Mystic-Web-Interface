@@ -1,7 +1,7 @@
-
+require('dotenv').config();
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
-const config = require('../slappey.json');
+//const config = require('../slappey.json');
 const client = new Client();
 const mongoose = require('mongoose');
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
@@ -25,6 +25,6 @@ db.once('open', function() {
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
   //console.log('are we online?');
-  await client.login(config.token);
+  await client.login(process.env.BOT_TOKEN);
 })();
 
