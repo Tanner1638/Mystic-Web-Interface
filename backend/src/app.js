@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const cors = require('cors');
 const Store = require('connect-mongo')(session);
+const { graphqlHTTP } = require('express-graphql');
+const RootSchema = require('./graphql');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -17,7 +19,11 @@ mongoose.connect('mongodb://localhost/botdashboard', {
   useUnifiedTopology: true,
 });
 
-app.use(cors({
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use( cors( {
   origin: ['http://localhost:3000'],
   credentials: true,
 }))
@@ -34,6 +40,12 @@ app.use( session( {
 
 app.use(passport.initialize() );
 app.use(passport.session());
+
+
+app.use('/graphql', graphqlHTTP({
+  graphiql: true,
+  schema: RootSchema,
+}));
 
 app.use('/api', routes);
 

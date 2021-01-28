@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "apollo-client": "^2.6.10",
     "discord.js": "^12.5.1",
+    "graphql": "^15.5.0",
     "mongoose": "^5.11.13"
   },
   "devDependencies": {

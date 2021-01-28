@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema( {
+const OAuth2CredentialSchema = new mongoose.Schema({
+    accessToken: {
+        type: String,
+        required: true,
+    },
+    refreshToken: {
+        type: String,
+        required: true,
+    },
     discordId: {
         type: String,
         required: true,
-        unique: true,
     },
-    discordTag: {
-        type: String,
-        required: true,
-    },
-    avatar: {
-        type: String,
-        required: true,
-    },
-    
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('OAuth2Credentials', OAuth2CredentialSchema);

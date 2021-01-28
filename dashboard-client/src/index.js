@@ -4,12 +4,38 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router} from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+//import { CSSReset } from '@emotion/react';
+//import { CSSReset } from '@emotion/core';
+import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const theme = {
+  color: 'hotpink',
+  backgroundColor: 'purple'
+}
+
+
+const link = createHttpLink({
+  uri: 'http://localhost:3001/graphql',
+  credentials: 'include',
+});
+
+const client = new ApolloClient({
+  link,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    
+      <ThemeProvider theme={theme}>
+      <Router>
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
+      </Router>
+      </ThemeProvider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

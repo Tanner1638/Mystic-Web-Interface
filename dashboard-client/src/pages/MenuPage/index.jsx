@@ -1,28 +1,22 @@
 import React from 'react';
-import { getUserDetails } from "../../utils/api";
+import { MenuComponent } from '../../components';
+import { getUserDetails, getGuilds } from "../../utils/api";
+import { useQuery } from '@apollo/client';
+import { menuPageQuery } from '../../graphql/queries';
 
 export function MenuPage( {
     history,
 } ) {
 
-    const [user, setUser] = React.useState( null );
-    const [loading, setLoading] = React.useState( true );
+    const { loading, error, data } = useQuery(menuPageQuery);
 
-    React.useEffect( () => {
-        getUserDetails()
-        .then( ( { data }) => {
-            console.log(data);
-            setUser(data);
-            setLoading( false );
-        } ).catch( ( err ) => {
-            history.push('/');
-            setLoading( false );
-        } );
-    }, [])
-
-    return !loading && (
-        <div>
-            <h1>Menu Page</h1>
-        </div>
-    );
+    if(!loading && !error) {
+        const { getMutualGuilds } = data;
+        return (
+            <div>
+                <h1>Menu Page</h1>
+                <MenuComponent guilds={ getMutualGuilds }/>
+            </div>
+        )
+    } return <h1>Loading...</h1>
 }

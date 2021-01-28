@@ -7,10 +7,12 @@ module.exports = class GuildCreateEvent extends BaseEvent {
   }
   
   async run(client, guild) {
+    
     try {
       const guildConfig = await GuildConfig.create({
-          guildID: guild.id,
+          guildId: guild.id,
       });
+
       console.log('Bot has joined the server. Saved to DB')
   } catch (err) {
       console.log(err);
@@ -18,3 +20,10 @@ module.exports = class GuildCreateEvent extends BaseEvent {
     
   }
 }
+
+/*
+
+GuildConfig = Mongoose.model('GuildConfig', GuildConfigSchema);
+
+
+*/
