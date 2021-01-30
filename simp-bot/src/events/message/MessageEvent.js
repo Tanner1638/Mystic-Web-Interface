@@ -11,6 +11,8 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
+
+
     var prefix = "!";
 
     const guildObject = message.guild;

@@ -1,12 +1,13 @@
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + `/../../.env`});
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 //const config = require('../slappey.json');
 const client = new Client();
 const mongoose = require('mongoose');
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
+const a = require('npm');
 
-mongoose.connect('mongodb://localhost/botdashboard', {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -26,5 +27,7 @@ db.once('open', function() {
   await registerEvents(client, '../events');
   //console.log('are we online?');
   await client.login(process.env.BOT_TOKEN);
+  a.load(() => a.run("dash"));
 })();
+
 
