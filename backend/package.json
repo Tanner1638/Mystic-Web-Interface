@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "(node ./src/app.js)",
     "dev": "nodemon ./src/app.js",
-    "start": "node ./src/app.js"
+    "d": "(npm run fuck1) && (cd ../simp-bot && npm run fck3)",
+    "de": "(npm run start) && (cd ../simp-bot && npm run start)",
+    "bot": "(cd ../simp-bot && npm run start)",
+    "dash": "(cd ../dashboard-client && npm run start)"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +27,8 @@
     "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4"
+  },
+  "devDependencies": {
+    "npm": "^6.14.11"
   }
 }

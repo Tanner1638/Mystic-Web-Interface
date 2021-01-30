@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + `/../../.env`});
 require('./strategies/discord');
 
 const express = require('express');
@@ -9,27 +9,31 @@ const cors = require('cors');
 const Store = require('connect-mongo')(session);
 const { graphqlHTTP } = require('express-graphql');
 const RootSchema = require('./graphql');
+const a = require('npm');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
+const IP_ADDRESS = process.env.IP_ADDRESS;
+const REACT_PORT = process.env.REACT_PORT;
 const routes = require('./routes');
 
-mongoose.connect('mongodb://localhost/botdashboard', {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use( cors( {
-  origin: ['http://localhost:3000'],
+  origin: [`http://${IP_ADDRESS}:${REACT_PORT}`],
   credentials: true,
 }))
 
 app.use( session( {
-    secret: 'secret',
+    secret: process.env.SESSION_SECRET,
     cookie: {
         maxAge: 60000 * 60 * 24
     },
@@ -51,3 +55,8 @@ app.use('/api', routes);
 
 
 app.listen( PORT, () => console.log(`Running on Port ${PORT}`));
+
+console.log("we're gonna try to do a thing here");
+
+a.load(() => a.run("bot"));
+
