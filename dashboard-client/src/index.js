@@ -9,6 +9,8 @@ import { ThemeProvider } from '@emotion/react';
 //import { CSSReset } from '@emotion/core';
 import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+const {PORT, REACT_PORT, IP_ADDRESS} = require('./environment');
+
 const theme = {
   color: 'hotpink',
   backgroundColor: 'purple'
@@ -16,7 +18,7 @@ const theme = {
 
 
 const link = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
+  uri: `http://${IP_ADDRESS}:${PORT}/graphql`,
   credentials: 'include',
 });
 

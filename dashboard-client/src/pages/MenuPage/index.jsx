@@ -7,11 +7,14 @@ import { menuPageQuery } from '../../graphql/queries';
 export function MenuPage( {
     history,
 } ) {
+    console.log("hiyo");
+    
 
     const { loading, error, data } = useQuery(menuPageQuery);
 
     if(!loading && !error) {
         const { getMutualGuilds } = data;
+        console.log(data);
         return (
             <div>
                 <h1>Menu Page</h1>

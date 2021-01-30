@@ -4,6 +4,7 @@ import { Switch, Route} from 'react-router-dom';
 import { LandingPage, MenuPage, DashboardPage} from './pages';
 
 function App() {
+  
   return (
     <Switch>
       <Route path="/" exact={true} component={ LandingPage } />

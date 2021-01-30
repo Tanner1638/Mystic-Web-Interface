@@ -1,20 +1,23 @@
 import axios from 'axios';
+require('dotenv').config({path: __dirname + '/../../../.env'});
+const IP_ADDRESS = process.env.IP_ADDRESS;
+const PORT = process.env.PORT;
 
 export function getUserDetails() {
-    return axios.get('http://localhost:3001/api/auth', { withCredentials: true } );
+    return axios.get(`http://${IP_ADDRESS}:${PORT}/api/auth`, { withCredentials: true } );
 }
 
 export function getGuilds() {
-    return axios.get('http://localhost:3001/api/discord/guilds', { withCredentials: true } );
+    return axios.get(`http://${IP_ADDRESS}:${PORT}/api/discord/guilds`, { withCredentials: true } );
 }
 
 export function getGuildConfig(guildId) {
-    return axios.get(`http://localhost:3001/api/discord/guilds/${guildId}/config`, { withCredentials:true } );
+    return axios.get(`http://${IP_ADDRESS}:${PORT}/api/discord/guilds/${guildId}/config`, { withCredentials:true } );
 }
 
 export function updateGuildPrefix(guildId, prefix) {
     return axios.put(
-        `http://localhost:3001/api/discord/guilds/${guildId}/prefix`, {
+        `http://${IP_ADDRESS}:${PORT}/api/discord/guilds/${guildId}/prefix`, {
             prefix
         }, {
             withCredentials: true,
@@ -24,7 +27,7 @@ export function updateGuildPrefix(guildId, prefix) {
 
 export function updateDefaultRole(guildId, defaultRole) {
     return axios.put(
-        `http://localhost:3001/api/discord/guilds/${guildId}/roles/default`,
+        `http://${IP_ADDRESS}:${PORT}/api/discord/guilds/${guildId}/roles/default`,
         {
             defaultRole
         }, {
@@ -35,7 +38,7 @@ export function updateDefaultRole(guildId, defaultRole) {
 
 export function getGuildRoles(guildId) {
     return axios.get(
-        `http://localhost:3001/api/discord/guilds/${guildId}/roles`, {
+        `http://${IP_ADDRESS}:${PORT}/api/discord/guilds/${guildId}/roles`, {
             withCredentials: true,
         }
     );
