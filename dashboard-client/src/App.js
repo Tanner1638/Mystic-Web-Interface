@@ -15,6 +15,7 @@ function App() {
         exact={true}
         component={DashboardPage}
       />
+      
     </Switch>
     
   );

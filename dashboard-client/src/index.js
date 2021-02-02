@@ -33,6 +33,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
       <Router>
         <ApolloProvider client={client}>
+          
           <App />
         </ApolloProvider>
       </Router>

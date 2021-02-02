@@ -4,9 +4,7 @@ import  styled  from '@emotion/styled';
 //import { Input, Select} from '@emotion/react';
 import { updateGuildPrefix } from '../../utils/api';
 
-const Button = styled.button`
-  color: turquoise;
-`
+const Button = styled.button
 
 
 export function DashboardMenu({

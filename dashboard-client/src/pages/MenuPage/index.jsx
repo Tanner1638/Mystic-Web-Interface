@@ -16,10 +16,17 @@ export function MenuPage( {
         const { getMutualGuilds } = data;
         console.log(data);
         return (
-            <div>
+            <body class="test">
+                <nav>
+                    <a href="">Home</a>
+                    <a href="menu">Menu</a>
+
+                </nav>
+
                 <h1>Menu Page</h1>
                 <MenuComponent guilds={ getMutualGuilds }/>
-            </div>
+
+            </body>
         )
     } return <h1>Loading...</h1>
 }
