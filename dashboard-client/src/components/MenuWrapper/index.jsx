@@ -7,8 +7,20 @@ export function MenuComponent( {
 }) {
 
     return (
-        <div>
-            <h1>Hello</h1>
+        <div class="tefst">
+            <h1>Menu Component</h1>
+
+            <div className="d-lg-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+                <div className="mb-4 mb-lg-0">
+                    
+                    <h4>Users List</h4>
+                    <p className="mb-0">Your web analytics dashboard template.</p>
+                </div>
+            </div>
+
+
+
+
             {guilds.included.map((guild) => (
                 <div>
                     <li>{guild.name}</li>
