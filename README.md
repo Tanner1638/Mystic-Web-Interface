@@ -7,6 +7,8 @@ _Wiki Updated: 2/1/2021_
 
 _Bot Version of Wiki Update: 3.0.1_
 
+[Visit Bot Dashboard](http://66.42.116.78:3000/)
+
 **Updates & Patch posts: [View Post](https://strangeislandstudios.com/mystics-simp-bot)**
 
 # Table Of Contents
@@ -32,8 +34,9 @@ Mystic's Simp Bot is developed with the purpose to reduce the need for multiple 
 
 
 ## Changes
+_V3.0.1_
 
-+ Bot dashboard was added so users can now interact with custom guild configurations via the bot.
++ Landing Page Implemented
 
 ***
 
