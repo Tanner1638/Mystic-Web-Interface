@@ -4,7 +4,7 @@ import  styled  from '@emotion/styled';
 //import { Input, Select} from '@emotion/react';
 import { updateGuildPrefix } from '../../utils/api';
 
-const Button = styled.button;
+
 
 
 export function DashboardMenu({
@@ -19,8 +19,8 @@ export function DashboardMenu({
 
     const defaultRoleId = config.defaultRole ? config.defaultRole : "";
     return (
-        <div>
-        <Formik
+        <body>
+            <Formik
                 initialValues={{ prefix: config.prefix, }}
                 onSubmit={({ prefix }) => {
                     updatePrefix(prefix);
@@ -30,7 +30,7 @@ export function DashboardMenu({
                     (props) => (
                         <form onSubmit={props.handleSubmit}>
                             <input type="text" name="prefix" onChange={props.handleChange} defaultValue={config.prefix} />
-                            <Button type="submit" children="Update Prefix" />
+                            <a type="submit" children="Update Prefix" />
 
                         </form>
                     )
@@ -48,12 +48,12 @@ export function DashboardMenu({
                                     <option value={role.id} selected={role.id === defaultRoleId}>{role.name}</option>
                                 ))}
                             </select>
-                            <Button type="submit" children="Update Role" />
+                            <a type="submit" children="Update Role" />
                         </form>
                     )
                 }
                 
             </Formik>
-            </div>
+        </body>
     )
 }

@@ -25,13 +25,16 @@ export function LandingPage(props) {
           </header>
         </nav>
         
-        <section class="skrollable u-clearfix u-section-1" id="sec-ffeb">
-          <div class="u-clearfix u-sheet u-sheet-1">
-            <h1 class="u-custom-font u-text u-text-1">Mystic's Simp Bot</h1>
+
+        <section class="skrollable u-clearfix home-section-1" id="sec-ffeb">
+          <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <h1 class="u-align-center u-custom-font u-text u-text-1">Mystic's Chaos Bot</h1>
             <p class="u-align-center u-custom-font u-text u-text-2">Fully Functional Discord Bot. Includes Moderation, Reaction Roles, Music Features, and more. 100% customizable and secure.</p>
             <a onClick={login} class="u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-4 u-radius-50 u-btn-1">Get started</a>
           </div>
+          
         </section>
+        
         
       </body>
       

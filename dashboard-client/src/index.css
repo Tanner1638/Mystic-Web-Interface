@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  height: 100%;
+  width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,6 +9,136 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #36393f;
   
+}
+
+.footerr {
+  position:absolute;
+  left: 0;
+  bottom: -50px;
+  padding: 0 100px 0;
+  width: 100%;
+  
+}
+
+div.container {
+  min-height: 10em;
+  display: table-cell;
+  vertical-align: middle }
+
+#wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80em;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1em;
+  width: 100%;
+}
+
+h1.loading {
+  animation: text-shadow 1.5s ease-in-out infinite;
+  font-size: 5em;
+  font-weight: 900;
+  line-height: 1;
+}
+
+h1:hover {
+  animation-play-state: paused;
+}
+
+a {
+  color: #024794;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+@keyframes text-shadow {
+  0% {  
+      transform: translateY(0);
+      text-shadow: 
+          0 0 0 #0c2ffb, 
+          0 0 0 #2cfcfd, 
+          0 0 0 #fb203b, 
+          0 0 0 #fefc4b;
+  }
+
+  20% {  
+      transform: translateY(-1em);
+      text-shadow: 
+          0 0.125em 0 #0c2ffb, 
+          0 0.25em 0 #2cfcfd, 
+          0 -0.125em 0 #fb203b, 
+          0 -0.25em 0 #fefc4b;
+  }
+
+  40% {  
+      transform: translateY(0.5em);
+      text-shadow: 
+          0 -0.0625em 0 #0c2ffb, 
+          0 -0.125em 0 #2cfcfd, 
+          0 0.0625em 0 #fb203b, 
+          0 0.125em 0 #fefc4b;
+  }
+  
+ 60% {
+      transform: translateY(-0.25em);
+      text-shadow: 
+          0 0.03125em 0 #0c2ffb, 
+          0 0.0625em 0 #2cfcfd, 
+          0 -0.03125em 0 #fb203b, 
+          0 -0.0625em 0 #fefc4b;
+  }
+
+  80% {  
+      transform: translateY(0);
+      text-shadow: 
+          0 0 0 #0c2ffb, 
+          0 0 0 #2cfcfd, 
+          0 0 0 #fb203b, 
+          0 0 0 #fefc4b;
+  }
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-logo {
+    animation: animate-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes animate-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-loading {
+  background-color: red;
+  position: relative;
+  animation-name: animated-loading;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes animated-loading {
+  0%   {background-color:red; left:0px; top:0px;}
+  20%  {background-color:yellow; left:-400px; top:0px;}
+  40%  {background-color:yellow; left:400px; top:500px;}
+  60%  {background-color:yellow; left:300px; top:-250px;}
+  80%  {background-color:yellow; left:-700px; top:600px;}
+  100% {background-color:red; left: 0px; top:0px; transform: rotate(360deg);}
 }
 
 code {
@@ -18,23 +150,25 @@ div.tefst {
   background-color: gray;
 }
 
-.u-section-1 .u-sheet-1 {
-  min-height: 932px;
+/* ------------------------------------- */
+
+.home-section-1 .u-sheet-1 {
+  min-height: 700px;
 }
 
-.u-section-1 .u-text-1 {
+.home-section-1 .u-text-1 {
   font-family: "Cinzel Decorative";
   text-shadow: 0px 4px 4px rgba(0,0,0,1);
   font-size: 4rem;
-  margin: 337px 271px 60px;
+  margin: 317px 0 0;
 }
 
-.u-section-1 .u-text-2 {
+.home-section-1 .u-text-2 {
   font-family: Quicksand;
   margin: 61px 0 0;
 }
 
-.u-section-1 .u-btn-1 {
+.home-section-1 .u-btn-1 {
   border-style: none;
   font-weight: 700;
   text-transform: uppercase;
@@ -48,66 +182,61 @@ div.tefst {
 }
 
 @media (max-width: 1199px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 1034px;
+  .home-section-1 .u-sheet-1 {
+    min-height: 700px;
   }
 
-  .u-section-1 .u-text-1 {
-    margin-top: 495px;
-    margin-left: 171px;
-    margin-right: 171px;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-top: -400px;
+  .home-section-1 .u-text-1 {
+    margin-top: 403px;
   }
 }
 
 @media (max-width: 991px) {
-  .u-section-1 .u-sheet-1 {
+  .home-section-1 .u-sheet-1 {
     min-height: 792px;
   }
 
-  .u-section-1 .u-text-1 {
-    margin-top: 520px;
-    margin-left: 61px;
-    margin-right: 61px;
+  .home-section-1 .u-text-1 {
+    margin-top: 251px;
   }
 
-  .u-section-1 .u-text-2 {
-    margin-top: -425px;
+  .home-section-1 .u-text-2 {
+    margin-top: 50px;
   }
 }
 
 @media (max-width: 767px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 594px;
+  .home-section-1 .u-sheet-1 {
+    min-height: 740px;
   }
 
-  .u-section-1 .u-text-1 {
-    margin-left: 0;
-    margin-right: 0;
+  .home-section-1 .u-text-1 {
+    font-size: 3rem;
+    margin-top: 240px;
   }
 
-  .u-section-1 .u-text-2 {
-    margin-top: -495px;
+  .home-section-1 .u-text-2 {
+    margin-top: 53px;
+  }
+
+  .home-section-1 .u-btn-1 {
+    margin-top: 50px;
   }
 }
 
 @media (max-width: 575px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 374px;
+  .home-section-1 .u-sheet-1 {
+    min-height: 500px;
   }
 
-  .u-section-1 .u-text-1 {
+  .home-section-1 .u-text-1 {
     font-size: 2.25rem;
-    margin-top: 545px;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-top: -419px;
+    margin-top: 209px;
   }
 }
+
+
+
 
 
 
@@ -117,6 +246,8 @@ div.tefst {
 
 
 /*!
+
+  NICE PAGE .CSS
  * froala_editor v3.2.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2020 Froala Labs
@@ -32253,39 +32384,9 @@ a.u-link.u-text-hover-grey-90:hover {
   min-height: 70px;
 }
 
-.u-header .u-menu-1 {
-  font-family: size-14;
-  margin: 15px 0 15px auto;
-}
 
-.u-header .u-nav-1 {
-  font-size: 1rem;
-}
 
-.u-header .u-nav-2 {
-  font-size: 1rem;
-}
-@media (max-width: 1199px) {
-  .u-header .u-menu-1 {
-    margin-bottom: 0;
-    margin-left: 951px;
-  }
-}
-@media (max-width: 991px) {
-  .u-header .u-menu-1 {
-    margin-left: 731px;
-  }
-}
-@media (max-width: 767px) {
-  .u-header .u-menu-1 {
-    margin-left: 551px;
-  }
-}
-@media (max-width: 575px) {
-  .u-header .u-menu-1 {
-    margin-left: 351px;
-  }
-}
+
 .u-footer {
   background-image: none;
 }
