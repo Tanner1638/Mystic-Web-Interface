@@ -5,7 +5,7 @@
 
 _Wiki Updated: 2/1/2021_
 
-_Bot Version of Wiki Update: 3.0.0_
+_Bot Version of Wiki Update: 3.0.1_
 
 **Updates & Patch posts: [View Post](https://strangeislandstudios.com/mystics-simp-bot)**
 
