@@ -11,6 +11,7 @@ module.exports = class GuildCreateEvent extends BaseEvent {
     try {
       const guildConfig = await GuildConfig.create({
           guildId: guild.id,
+          guildName: guild.name,
       });
 
       console.log('Bot has joined the server. Saved to DB')

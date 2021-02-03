@@ -16,6 +16,7 @@ module.exports = class InitGuildCommand extends BaseCommand {
     try {
       const guildConfig = await GuildConfig.create({
         guildId: message.guild.id,
+        guildName: message.guild.name,
       });
   
       console.log('Bot has joined the server. Saved to DB');
