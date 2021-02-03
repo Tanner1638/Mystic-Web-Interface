@@ -3,9 +3,9 @@
 
 # Mystics Discord Bot W/ Web Interface
 
-_Wiki Updated: 2/1/2021_
+_Wiki Updated: 2/3/2021_
 
-_Bot Version of Wiki Update: 3.0.1_
+_Bot Version of Wiki Update: 3.1.2_
 
 [Visit Bot Dashboard](http://66.42.116.78:3000/)
 
