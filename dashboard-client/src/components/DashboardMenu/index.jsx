@@ -16,7 +16,7 @@ text-shadow: 0px 0 0px rgba(0,0,0,0);
 margin: 10px 0 0 auto;
 
 background-color: #bf3f3f;
-`
+`;
 
 export function DashboardMenu({
     history,

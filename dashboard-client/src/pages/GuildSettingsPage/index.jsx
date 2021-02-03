@@ -28,7 +28,7 @@ export function DashboardPage( {
         } catch ( err ) {
             console.log(err);
         }
-    }
+    };
 
     const updateDefaultRoleParent = async (roleId) => {
         try {
@@ -59,6 +59,6 @@ export function DashboardPage( {
                     updateRole={updateDefaultRoleParent}
                 />
             </body>
-        )
-    } return <LoadingModule />
+        );
+    } return <LoadingModule />;
 }

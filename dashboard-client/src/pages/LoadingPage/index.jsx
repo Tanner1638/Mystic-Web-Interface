@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { LoadingModule } from '../../components';
 
 const {PORT, REACT_PORT, IP_ADDRESS} = require('../../environment');
 const Button = styled.button`
   color: turquoise;
-`
+`;
 
 //point to backend function
 export function LoadingPage(props) {
@@ -20,5 +20,5 @@ export function LoadingPage(props) {
         <LoadingModule/>
       </body>
     </html>
-    )
+    );
 }
