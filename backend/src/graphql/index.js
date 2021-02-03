@@ -46,6 +46,7 @@ const GuildConfigType = new GraphQLObjectType({
     fields: () => ({
         guildId: { type: GraphQLString },
         prefix: { type: GraphQLString },
+        guildName: { type: GraphQLString },
         defaultRole: { type: GraphQLString },
         memberLogChannel: { type: GraphQLString },
 
