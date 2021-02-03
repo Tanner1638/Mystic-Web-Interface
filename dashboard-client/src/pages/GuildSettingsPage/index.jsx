@@ -41,7 +41,7 @@ export function DashboardPage( {
         } catch (err){
             console.log(err);
         }
-    }
+    };
 
     if(!loading && !error) {
         const {
