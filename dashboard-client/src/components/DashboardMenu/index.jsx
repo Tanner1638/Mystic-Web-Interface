@@ -5,7 +5,18 @@ import  styled  from '@emotion/styled';
 import { updateGuildPrefix } from '../../utils/api';
 
 
+const Button = styled.button`	
+font-size: 0.9375rem;
+letter-spacing: 1px;
+border-style: none;
+font-weight: 700;
+text-transform: uppercase;
+box-shadow: 0px 5px 20px 0 rgba(0,0,0,0.25);
+text-shadow: 0px 0 0px rgba(0,0,0,0);
+margin: 10px 0 0 auto;
 
+background-color: #bf3f3f;
+`
 
 export function DashboardMenu({
     history,
@@ -40,34 +51,34 @@ export function DashboardMenu({
 
 
             <section class="u-clearfix u-valign-middle-sm u-valign-middle-xs guild-config-section-2" id="sec-98eb">
-            <div class="u-container-style u-custom-color-5 u-expanded-width u-group u-shape-rectangle u-group-1">
-                <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-top-sm u-container-layout-1">
-                <p class="u-align-left u-text u-text-1">Administrator Roles</p>
-                <p class="u-align-left u-text u-text-2">Below are the roles that have the Administrator permission in your server. By default, any role with Administrator permission is considered as a bot master. </p>
-                <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-2">
-                    <div class="u-container-layout u-container-layout-2"></div>
-                </div>
-                <p class="u-align-left u-text u-text-3">Additional Bot Master Roles</p>
-                <p class="u-align-left u-text u-text-4">You can add roles below that will also be considered bot masters, even if they do not have the Administrator permission.</p>
-                <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-3">
-                    <div class="u-container-layout u-container-layout-3">
+                <div class="u-container-style u-custom-color-5 u-expanded-width u-group u-shape-rectangle u-group-1">
+                    <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-top-sm u-container-layout-1">
+                    <p class="u-align-left u-text u-text-1">Administrator Roles</p>
+                    <p class="u-align-left u-text u-text-2">Below are the roles that have the Administrator permission in your server. By default, any role with Administrator permission is considered as a bot master. </p>
+                    <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-2">
+                        <div class="u-container-layout u-container-layout-2"></div>
+                    </div>
+                    <p class="u-align-left u-text u-text-3">Additional Bot Master Roles</p>
+                    <p class="u-align-left u-text u-text-4">You can add roles below that will also be considered bot masters, even if they do not have the Administrator permission.</p>
+                    <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-3">
+                        <div class="u-container-layout u-container-layout-3">
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
             </section>
 
 
             <section class="u-clearfix u-valign-middle-sm u-valign-middle-xs guild-config-section-3" id="carousel_a753">
-            <div class="u-container-style u-custom-color-5 u-expanded-width u-group u-shape-rectangle u-group-1">
-                <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-middle-xs u-container-layout-1">
-                <p class="u-align-left u-text u-text-1">Language</p>
-                <p class="u-align-left u-text u-text-2">Change the default language of Mystic's Simp Bot in your server</p>
-                <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-2">
-                    <div class="u-container-layout u-container-layout-2"></div>
+                <div class="u-container-style u-custom-color-5 u-expanded-width u-group u-shape-rectangle u-group-1">
+                    <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-valign-middle-xs u-container-layout-1">
+                        <p class="u-align-left u-text u-text-1">Language</p>
+                        <p class="u-align-left u-text u-text-2">Change the default language of Mystic's Simp Bot in your server</p>
+                        <div class="u-align-left u-border-2 u-border-custom-color-7 u-container-style u-custom-color-6 u-expanded-width u-group u-radius-5 u-shape-round u-group-2">
+                            <div class="u-container-layout u-container-layout-2"></div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </section>
 
 
@@ -121,6 +132,7 @@ export function DashboardMenu({
                                     <option value={role.id} selected={role.id === defaultRoleId}>{role.name}</option>
                                 ))}
                             </select>
+                            <Button type="submit" children="Update Role" />
                         </form>
                     )
                 }

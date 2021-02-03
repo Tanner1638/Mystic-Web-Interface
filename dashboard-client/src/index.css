@@ -278,7 +278,20 @@ div.tefst {
 *
 */
 
+.dot {
+  width: 50px;
+  height: 50px;
+  margin: -46px auto -13px 0;
+  background-color:rgb(41, 41, 48);
+  border-radius:50%;
+}
+
 .menu-section-1 {
+  min-height: 72px;
+}
+
+/* menu boi */
+.menu-section2 {
   min-height: 72px;
 }
 
@@ -320,9 +333,16 @@ div.tefst {
 }
 
 @media (max-width: 575px) {
-  .menu-section-1 .u-container-layout-1 {
+  .menu-section-2 .u-container-layout-1 {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .menu-section-2 .u-list-item-1 {
+    box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-bottom: 5px;
+    padding-top: 5px;
   }
 }.menu-section-2 .u-sheet-1 {
   min-height: 624px;
@@ -339,8 +359,24 @@ div.tefst {
 
 .menu-section-2 .u-list-item-1 {
   box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
+  
 }
 
+
+
+
+
+
+/*
+***
+***
+***
+***
+***
+***
+***
+***
+/*/
 .menu-section-2 .u-container-layout-1 {
   padding-top: 15px;
   padding-right: 30px;
@@ -348,6 +384,7 @@ div.tefst {
   padding-left: 20px;
   margin: 15px auto 15px;
 }
+/**/
 
 .menu-section-2 .u-text-1 {
   margin: 0 268px 0 70px;
@@ -364,10 +401,12 @@ div.tefst {
   margin: -36px 0 0 auto;
 }
 
+
 .menu-section-2 .u-image-1 {
   width: 50px;
   height: 50px;
   margin: -46px auto -13px 0;
+  border-radius: 50%;
 }
 
 @media (max-width: 1199px) {
@@ -408,8 +447,6 @@ div.tefst {
     margin-top: -44px;
     margin-bottom: -10px;
   }
-
-  
 }
 
 @media (max-width: 575px) {
@@ -33418,7 +33455,7 @@ a.u-link.u-text-hover-grey-90:hover {
         {
         color: #a1a1a1;
         }
-        .u-custom-color-1 .u-btn,.u-custom-color-3 .u-btn,.u-custom-color-4 .u-btn,.u-custom-color-5 .u-btn,.u-custom-color-6 .u-btn,.u-custom-color-7 .u-btn,.u-body-color .u-btn,.u-bg-color .u-btn,.u-palette-1-base .u-btn,.u-palette-1-dark-3 .u-btn,.u-palette-1-dark-2 .u-btn,.u-palette-1-dark-1 .u-btn,.u-palette-1 .u-btn,.u-palette-1-light-1 .u-btn,.u-palette-2-base .u-btn,.u-palette-2-dark-3 .u-btn,.u-palette-2-dark-2 .u-btn,.u-palette-2-dark-1 .u-btn,.u-palette-2 .u-btn,.u-palette-2-light-1 .u-btn,.u-palette-3-dark-3 .u-btn,.u-palette-3-dark-2 .u-btn,.u-palette-3-dark-1 .u-btn,.u-palette-4-base .u-btn,.u-palette-4-dark-3 .u-btn,.u-palette-4-dark-2 .u-btn,.u-palette-4-dark-1 .u-btn,.u-palette-5-dark-3 .u-btn,.u-palette-5-dark-2 .u-btn,.u-palette-5-dark-1 .u-btn,.u-grey-40 .u-btn,.u-grey-30 .u-btn,.u-grey-90 .u-btn,.u-grey-80 .u-btn,.u-grey-75 .u-btn,.u-black .u-btn,.u-grey-70 .u-btn,.u-grey-60 .u-btn,.u-grey-50 .u-btn,.u-grey-dark-3 .u-btn,.u-grey-dark-2 .u-btn,.u-grey-dark-1 .u-btn,.u-grey .u-btn,.u-shading .u-btn,.u-overlap-contrast .u-header .u-btn
+        .u-custom-color-1 .u-btn,.u-custom-color-3 .u-btn,.u-custom-color-4 .u-btn,.u-custom-color-6 .u-btn,.u-custom-color-7 .u-btn,.u-body-color .u-btn,.u-bg-color .u-btn,.u-palette-1-base .u-btn,.u-palette-1-dark-3 .u-btn,.u-palette-1-dark-2 .u-btn,.u-palette-1-dark-1 .u-btn,.u-palette-1 .u-btn,.u-palette-1-light-1 .u-btn,.u-palette-2-base .u-btn,.u-palette-2-dark-3 .u-btn,.u-palette-2-dark-2 .u-btn,.u-palette-2-dark-1 .u-btn,.u-palette-2 .u-btn,.u-palette-2-light-1 .u-btn,.u-palette-3-dark-3 .u-btn,.u-palette-3-dark-2 .u-btn,.u-palette-3-dark-1 .u-btn,.u-palette-4-base .u-btn,.u-palette-4-dark-3 .u-btn,.u-palette-4-dark-2 .u-btn,.u-palette-4-dark-1 .u-btn,.u-palette-5-dark-3 .u-btn,.u-palette-5-dark-2 .u-btn,.u-palette-5-dark-1 .u-btn,.u-grey-40 .u-btn,.u-grey-30 .u-btn,.u-grey-90 .u-btn,.u-grey-80 .u-btn,.u-grey-75 .u-btn,.u-black .u-btn,.u-grey-70 .u-btn,.u-grey-60 .u-btn,.u-grey-50 .u-btn,.u-grey-dark-3 .u-btn,.u-grey-dark-2 .u-btn,.u-grey-dark-1 .u-btn,.u-grey .u-btn,.u-shading .u-btn,.u-overlap-contrast .u-header .u-btn
         {
         background-color: #ffffff;
         color: #000000;

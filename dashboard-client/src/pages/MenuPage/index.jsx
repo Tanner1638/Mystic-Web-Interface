@@ -17,7 +17,10 @@ export function MenuPage( {
         console.log("Heres ya data");
         console.log(data);
         return (
-            <MenuComponent guilds={ getMutualGuilds }/>
+            <body>
+                
+                <MenuComponent guilds={ getMutualGuilds }/>
+            </body>
         )
     } return (
         <LoadingModule/>
