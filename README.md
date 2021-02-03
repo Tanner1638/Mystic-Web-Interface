@@ -34,13 +34,13 @@ Mystic's Simp Bot is developed with the purpose to reduce the need for multiple 
 
 
 ## Changes
-_V3.0.1_
+_V3.1.2_
 
 + Landing Page Implemented
 
 ***
 
-# Current Version: v3.0.1
+# Current Version: v3.1.2
 
 ## User Features
 
