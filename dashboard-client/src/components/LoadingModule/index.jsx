@@ -10,7 +10,7 @@ export function LoadingModule() {
             </head>
             
             <body class="u-body u-stick-footer">
-                <section class="skrollable u-clearfix u-section-1">
+                <section class="skrollable u-clearfix u-section-1 customPosition">
                     <div class="u-clearfix u-sheet u-sheet-1">
                         <h1 class="u-align-center u-custom-font u-text u-text-1 loading">Loading</h1>
                     </div>

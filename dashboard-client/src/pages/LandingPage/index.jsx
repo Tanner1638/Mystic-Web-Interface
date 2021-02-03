@@ -8,12 +8,16 @@ const Button = styled.button`
 
 //point to backend function
 export function LandingPage(props) {
+  // Popup window code
+    
+    
     const login = () => window.location.href = `http://${IP_ADDRESS}:2999/api/auth/discord`;
     return (
     <html>
       <head>
         <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700,900|Quicksand:300,400,500,600,700" />
         <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:400,700,900|Quicksand:300,400,500,600,700" />
+        
       </head>
 
       <body class="u-body u-overlap">
