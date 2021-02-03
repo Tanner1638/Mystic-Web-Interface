@@ -11,10 +11,12 @@ export const menuPageQuery = gql`
             included {
                 name
                 id
+                icon
             }
             excluded {
                 name
                 id
+                icon
             }
         }
     }

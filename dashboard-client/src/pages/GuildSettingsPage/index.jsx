@@ -1,5 +1,6 @@
 import React from 'react';
 import { DashboardMenu } from '../../components';
+import { LoadingModule } from '../../components';
 //import { getGuildRoles } from '../../utils/api'
 //import { useMultiStyleConfig } from '@chakra-ui/react';
 import { useQuery, useMutation } from '@apollo/client';
@@ -27,7 +28,7 @@ export function DashboardPage( {
         } catch ( err ) {
             console.log(err);
         }
-    }
+    };
 
     const updateDefaultRoleParent = async (roleId) => {
         try {
@@ -40,7 +41,7 @@ export function DashboardPage( {
         } catch (err){
             console.log(err);
         }
-    }
+    };
 
     if(!loading && !error) {
         const {
@@ -49,8 +50,7 @@ export function DashboardPage( {
             getUser,
         } = data;
         return (
-            <div>
-                <h1>Menu Page</h1>
+            <body>
                 <DashboardMenu
                     user={getUser}
                     config={getGuildConfig}
@@ -58,7 +58,7 @@ export function DashboardPage( {
                     updatePrefix={updateGuildPrefixParent}
                     updateRole={updateDefaultRoleParent}
                 />
-            </div>
-        )
-    } return <h1>Loading...</h1>
+            </body>
+        );
+    } return <LoadingModule />;
 }
