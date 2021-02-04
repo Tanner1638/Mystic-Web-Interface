@@ -11,12 +11,15 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
+    if (message.guild.id != 783496949427863563) return;
+    console.log(`${message.author.username}: ${message.content}`);
+
+    
 
 
     var prefix = "!";
 
     const guildObject = message.guild;
-
     const query = GuildConfig.where({ guildId: guildObject.id});
     await query.findOne(function (err, guild) {
       if (err) return handleError(err);
@@ -27,6 +30,7 @@ module.exports = class MessageEvent extends BaseEvent {
 
     
     if (message.content.startsWith(prefix)) {
+      console.log("\n---Message starts with prefix. Continuing---\n");
       const [cmdName, ...cmdArgs] = message.content
       .slice(prefix.length)
       .trim()

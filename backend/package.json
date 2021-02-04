@@ -9,6 +9,7 @@
     "d": "(npm run fuck1) && (cd ../simp-bot && npm run fck3)",
     "de": "(npm run start) && (cd ../simp-bot && npm run start)",
     "bot": "(cd ../simp-bot && npm run start)",
+    "botDev": "(cd ../simp-bot && npm run dev)",
     "dash": "(cd ../dashboard-client && npm run start)"
   },
   "keywords": [],
