@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 /**
  * replies with a template embed. Will need to be updated later
  * @version 4.2.1
+ * TODO@Tanner1638 #37 Edit createEmbed command to be customizable.
  */
 
 module.exports = class CreateEmbedCommand extends BaseCommand {
