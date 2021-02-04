@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { LoadingModule } from '../../components';
 
-const {PORT, REACT_PORT, IP_ADDRESS} = require('../../../environment');
+const {PORT, REACT_PORT, IP_ADDRESS} = require('../../environment');
 const Button = styled.button`
   color: turquoise;
 `;

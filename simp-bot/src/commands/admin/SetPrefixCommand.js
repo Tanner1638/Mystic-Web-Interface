@@ -1,44 +1,31 @@
-/*
-import { updateDefaultRoleMutation, updateGuildPrefixMutation } from '../../../../dashboard-client/src/graphql/mutations';
-import { useQuery, useMutation } from '@apollo/client';
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
+/**
+ * Used to update the GuildConfig database for any guilds already initialized
+ * @version 4.2.0
+ */
 
 module.exports = class SetPrefixCommand extends BaseCommand {
   constructor() {
     super('setPrefix', 'admin', []);
   }
 
-  run(client, message, args) {
-
-    if (!args[1]) {
+  async run(client, message, args) {
+    if (!args[0]) {
       message.channel.send("You need to provide more info!");
     } else {
-      message.channel.send(args[0]);
-      var prefix = args[0];
-
-      const [ updatePrefix ] = useMutation(updateGuildPrefixMutation);
-
-      const updateGuildPrefixParent = async (prefix) => {
-        try {
-            const response = await updatePrefix({
-                variables: {
-                    guildId: match.params.id,
-                    prefix,
-                }
-            });
-        } catch ( err ) {
-            console.log(err);
-        }
-    }
-
-      //const query = GuildConfig.where({ guildId: guildObject.id });
-      //query.findOneAndUpdate(guild, args[0])
       
+      try{
+      const newPrefix = args[0];
+
+      const guildObject = message.guild;
+      const query = await GuildConfig.findOneAndUpdate({ guildId: guildObject.id}, {prefix: newPrefix});
+      message.channel.send(`Prefix changed! New prefix: ${args[0]}`);
+    } catch (err) {
+      message.channel.send('An Error has occured! I cannot Complete this action.');
+      console.log(err);
     }
-
-
+    }
   }
 }
-*/
