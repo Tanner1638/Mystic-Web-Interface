@@ -3,10 +3,10 @@
 
 Stable: Chaos v4.2.3.0
 
-# Update 4.2.3
+# Update 4.2.4
 
 ### Chaos: Discord Bot
-Version 4.2.3.x
+Version 4.2.4.x
 
 Date: 2/4/2021
 
