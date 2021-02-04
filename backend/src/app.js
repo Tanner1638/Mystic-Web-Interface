@@ -58,5 +58,5 @@ app.listen( PORT, () => console.log(`Running on Port ${PORT}`));
 
 console.log("we're gonna try to do a thing here");
 
-a.load(() => a.run("bot"));
+a.load(() => a.run("botDev"));
 

@@ -1,6 +1,11 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const Discord = require('discord.js');
 
+/**
+ * replies with an embed with a link to the bot dashboard.
+ * @version 4.2.1
+ */
+
 module.exports = class DashboardCommand extends BaseCommand {
   constructor() {
     super('dashboard', 'admin', []);

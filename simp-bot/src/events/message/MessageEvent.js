@@ -11,8 +11,7 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
-    if (message.guild.id != 783496949427863563) return;
-    console.log(`${message.author.username}: ${message.content}`);
+
 
     
 

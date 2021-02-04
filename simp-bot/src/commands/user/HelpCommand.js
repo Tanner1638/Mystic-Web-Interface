@@ -1,24 +1,19 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
-const Discord = require('discord.js');
 
 /**
- * replies with a template embed. Will need to be updated later
- * @version 4.2.1
+ * if no following arguments: replies with an embed of the different catagories of commands
+ * otherwise: replies with an embed of commands related to the catagory specified.
+ * @version 4.2.2
  */
 
-module.exports = class CreateEmbedCommand extends BaseCommand {
+module.exports = class HelpCommand extends BaseCommand {
   constructor() {
-    super('createEmbed', 'admin', []);
+    super('help', 'user', []);
   }
 
+
   run(client, message, args) {
-    console.log('createEmbed command works\n');
-
-    var member = message.author;
-
-    console.log(member.username);
-    console.log(member.avatar);
-
+    
     const exampleEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
     .setURL('http://66.42.116.78:3000/')
