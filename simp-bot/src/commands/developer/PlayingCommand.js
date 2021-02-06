@@ -6,6 +6,7 @@ module.exports = class PlayingCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    message.channel.send('playing command works');
+    let playArg = args.slice(0).join(" ");
+      client.user.setActivity(playArg);
   }
 }
