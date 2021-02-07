@@ -3,10 +3,10 @@
 
 Stable: Chaos v4.3
 
-# Update 4.3.4
+# Update 4.3.5
 
 ### Chaos: Discord Bot
-Version 4.3.4
+Version 4.3.5
 
 Date: 2/7/2021
 
@@ -14,6 +14,10 @@ Date: 2/7/2021
 - Added Listening To command.
 - Added Playing command.
 - Added Purge command
+- Started working on custom invite roles. 
+- Added on inviteCreate Event
+- Added on inviteDelete Event
+- Added on guildMemberAdd Event
 
 ## Fixed Issues
 - ...
