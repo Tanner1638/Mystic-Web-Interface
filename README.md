@@ -3,12 +3,12 @@
 
 Stable: Chaos v4.3
 
-# Update 4.3.2
+# Update 4.3.3
 
 ### Chaos: Discord Bot
-Version 4.3.2
+Version 4.3.3
 
-Date: 2/4/2021
+Date: 2/7/2021
 
 ## New Features
 - Added Listening To command.
@@ -19,7 +19,7 @@ Date: 2/4/2021
 
 
 ## Improvements
-- ...
+- Changed say command to include channel specification. Specify a channel to send the bot message to!
 
 
 ### Notes:
