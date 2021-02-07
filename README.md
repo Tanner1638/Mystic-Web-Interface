@@ -3,16 +3,17 @@
 
 Stable: Chaos v4.3
 
-# Update 4.3.3
+# Update 4.3.4
 
 ### Chaos: Discord Bot
-Version 4.3.3
+Version 4.3.4
 
 Date: 2/7/2021
 
 ## New Features
 - Added Listening To command.
 - Added Playing command.
+- Added Purge command
 
 ## Fixed Issues
 - ...
