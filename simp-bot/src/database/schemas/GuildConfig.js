@@ -23,6 +23,10 @@ const GuildConfigSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.String,
         required: false,
     },
+    inviteLinks: {
+        type: mongoose.SchemaTypes.Array,
+        required: false,
+    }
 });
 
 module.exports = mongoose.model('GuildConfig', GuildConfigSchema);
