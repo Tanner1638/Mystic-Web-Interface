@@ -35,7 +35,21 @@ module.exports = class MessageEvent extends BaseEvent {
       .split(/\s+/);
       const command = client.commands.get(cmdName);
       if (command) {
+        message.channel.startTyping();
+        if(command.category == "developer" && message.member.id != '542483559500218389'){
+          message.channel.bulkDelete(1);
+          message.reply("this is a developer command ;)")
+          .then(message => {
+            message.delete({ timeout: 5000});
+          })
+          .catch(err => {
+            throw err
+          });
+          return;
+        }
+        
         command.run(client, message, cmdArgs);
+        message.channel.stopTyping();
       }
     }
   }

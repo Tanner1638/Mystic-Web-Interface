@@ -14,6 +14,20 @@ module.exports = class AssignRoleByInviteCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+
+    var Permissions = message.member.permissions;
+    if(!Permissions.has('MANAGE_ROLES')) {
+      message.channel.bulkDelete(1);
+      message.reply("you dont have permissions to complete this action.")
+      .then(message => {
+        message.delete({ timeout: 5000});
+      })
+      .catch(err => {
+        throw err
+      });
+      return;
+    }
+
     var commandName = 'assignInviteRole';
 
     if (!args[1]) return message.reply(`You must provide a role and a invite URL or code to perform this action.\n\n**Examples**:\n!${commandName} @member <http://discord.gg//INVITECODE>\n!${commandName} member INVITECODE`);

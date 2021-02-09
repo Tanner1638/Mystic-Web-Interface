@@ -12,6 +12,19 @@ module.exports = class SetPrefixCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+
+    if(!message.member.permissions.has('MANAGE_GUILD')) {
+      message.channel.bulkDelete(1);
+      message.reply("you dont have permissions to manage the server.")
+      .then(message => {
+        message.delete({ timeout: 5000});
+      })
+      .catch(err => {
+        throw err
+      });
+      return;
+    }
+
     if (!args[0]) {
       message.channel.send("You need to provide more info!");
     } else {

@@ -11,12 +11,26 @@ module.exports = class PurgeCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    let time = 5000; //5 Seconds
+
+    if(!message.member.permissions.has('MANAGE_MESSAGES')) {
+      message.channel.bulkDelete(1);
+      message.reply("You dont have permissions to manage messages.")
+      .then(message => {
+        message.delete({ timeout: time});
+      })
+      .catch(err => {
+        throw err
+      });
+      return;
+    }
+    
     if(!args[0] || parseInt(args[0],10) <= 0){
       return message.reply('How many messages do you want to delete? (1 - 99)');
     }
     let amount = parseInt(args[0],10)+1;
     
-    let time = 5000; //5 Seconds
+    
 
     if(amount > 100) {
       message.reply(`I can only delete 99 messages at a time!\n*This message will delete after ${time/1000} seconds*`)

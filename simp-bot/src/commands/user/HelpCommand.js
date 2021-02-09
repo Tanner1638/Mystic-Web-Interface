@@ -1,4 +1,5 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
+const Discord = require('discord.js');
 
 /**
  * if no following arguments: replies with an embed of the different catagories of commands
