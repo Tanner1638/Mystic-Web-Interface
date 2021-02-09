@@ -29,7 +29,6 @@ module.exports = class MessageEvent extends BaseEvent {
 
     
     if (message.content.startsWith(prefix)) {
-      console.log("\n---Message starts with prefix. Continuing---\n");
       const [cmdName, ...cmdArgs] = message.content
       .slice(prefix.length)
       .trim()

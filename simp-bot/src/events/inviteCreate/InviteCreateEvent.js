@@ -13,26 +13,25 @@ module.exports = class InviteCreateEvent extends BaseEvent {
     super('inviteCreate');
   }
   async run (client, invite) {
-    console.log('Server Invite has been created.');
-    console.log(`Invite: ${invite}`);
-    console.log(`Guild ID: ${invite.guild.id}`);
-    console.log('\n Searching for guild.\n');
-    
+    await addInviteToArray(invite);
+  }
+}
 
-    const guildObject = invite.guild;
-    console.log("\nINVITE INFO\n");
-    //console.log(invite);
-
-    var invObject = {code: invite.code, uses: invite.uses};
+async function addInviteToArray(invite) {
+  console.log('Server Invite has been created.');
+  //console.log(`Invite: ${invite}`);
+  const guildObject = invite.guild;
 
 
-    //This will add the invite link to the database
-    try {
-        const query = await GuildConfig.findOneAndUpdate({ guildId: guildObject.id}, { $push: {inviteLinks: invObject}});
-        console.log('Invite added to inviteLinks')
-    }
-    catch (err) {
-        console.log(err);
-    }
+  var invObject = { code: invite.code, uses: invite.uses, roles: null};
+
+
+  //This will add the invite link to the database
+  try {
+    const query = await GuildConfig.findOneAndUpdate({ guildId: guildObject.id }, { $push: { inviteLinks: invObject } });
+    console.log(`Invite added to inviteLinks: ${invite}`);
+  }
+  catch (err) {
+    console.log(err);
   }
 }
