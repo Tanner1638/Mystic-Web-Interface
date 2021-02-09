@@ -3,10 +3,10 @@
 
 Stable: Chaos v4.3
 
-# Update 4.3.6
+# Update 4.3.7
 
 ### Chaos: Discord Bot
-Version 4.3.6
+Version 4.3.7
 
 Date: 2/7/2021
 
@@ -14,12 +14,15 @@ Date: 2/7/2021
 - Added Listening To command.
 - Added Playing command.
 - Added Purge command
-- Started working on custom invite roles. 
 - Added on inviteCreate Event
 - Added on inviteDelete Event
 - Added on guildMemberAdd Event
 - Added ability to change bots username
 - Added ability to change bots avatar
+- Added function to save newly created invite links
+- Added function to compare and adjust invite link uses value in database
+- Added ability to specify a role to assign upon user joining specified invite URL
+
 
 ## Fixed Issues
 - ...
@@ -27,6 +30,7 @@ Date: 2/7/2021
 
 ## Improvements
 - Changed say command to include channel specification. Specify a channel to send the bot message to!
+- Removed debug logs on messageEvent
 
 
 ### Notes:

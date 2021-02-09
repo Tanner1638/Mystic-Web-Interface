@@ -3,10 +3,9 @@ const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
 /**
  * initiates when new member joins
- * @version 4.3.5
+ * @version 4.3.7
  * 
- * when an invite link is created, an initial value of uses of 0 is defined. When an invite link is used this value is increased.
- * search in database comparison between original link value and the one that increased.
+ * @TODO #56
  */
 
 module.exports = class InviteCreateEvent extends BaseEvent {
@@ -14,26 +13,34 @@ module.exports = class InviteCreateEvent extends BaseEvent {
     super('guildMemberAdd');
   }
   async run (client, member) {
-    console.log('A new member has joined!');
-    console.log(`Member: ${member}`);
-
-
-
-    
-
-    ///const guildObject = member.guild;
-    
+    member.guild.fetchInvites()
+    .then(async invites => {
+      const guildObject = member.guild;
+      const query = GuildConfig.where({ guildId: guildObject.id });
+      await query.findOne(function (err, guild) {
+        if (err)
+            return handleError(err);
+        if (guild) {
+          var inviteLinks = guild.inviteLinks;
+          
+          invites.forEach(async invite => {
+            for(var i in inviteLinks){
+              if(inviteLinks[i].code == invite.code){
+                if(inviteLinks[i].uses != invite.uses){
+                  await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': invite.code},
+                    { $set: {'inviteLinks.$.uses': invite.uses}
+                  });
+                  if(inviteLinks[i].roles){
+                    member.roles.add(inviteLinks[i].roles).catch(console.error);
+                  }
+                  return;
+                }
+              }
+            }
+          });
+        }
+      });
+    })
+    .catch(console.error);
   }
 }
-
-function getInvites(message) {
-    message.guild.fetchInvites()
-      .then(invites => {
-        console.log(`Fetched ${invites.size} invites`);
-  
-        invites.forEach(invite => {
-          console.log(`Code: ${invite} | Uses: ${invite.uses}`);
-        });
-      })
-      .catch(console.error);
-  }
