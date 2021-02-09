@@ -1,7 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b775839b70364ba89233e4848f653ba7)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Tanner1638/Mystic-Web-Interface&amp;utm_campaign=Badge_Grade)
 [![Website](https://img.shields.io/badge/website-visit-brightgreen)](https://strangeislandstudios.com)
 
-Stable: Chaos v4.4
+Stable: Chaos v4.4.0
 
 # Update 4.4.0
 
