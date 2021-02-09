@@ -3,10 +3,10 @@
 
 Stable: Chaos v4.3
 
-# Update 4.3.5
+# Update 4.3.6
 
 ### Chaos: Discord Bot
-Version 4.3.5
+Version 4.3.6
 
 Date: 2/7/2021
 
@@ -18,6 +18,8 @@ Date: 2/7/2021
 - Added on inviteCreate Event
 - Added on inviteDelete Event
 - Added on guildMemberAdd Event
+- Added ability to change bots username
+- Added ability to change bots avatar
 
 ## Fixed Issues
 - ...
