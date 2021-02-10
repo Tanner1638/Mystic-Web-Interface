@@ -1,20 +1,14 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const Discord = require('discord.js');
 
-/**
- * if no following arguments: replies with an embed of the different catagories of commands
- * otherwise: replies with an embed of commands related to the catagory specified.
- * @version 4.2.2
- */
-
-module.exports = class HelpCommand extends BaseCommand {
+module.exports = class DevhelpCommand extends BaseCommand {
   constructor() {
-    super('help', 'user', []);
+    super('devhelp', 'developer', []);
   }
-
 
   run(client, message, args) {
     const commands = {
+      '[ USER COMMANDS ]': '---------------------------',
       'help': 'Displays this message!',
       '[ ADMIN COMMANDS ]': '---------------------------',
       'assignInviteRole': 'Link a role for users to be given upon joining a specific invite link',
@@ -22,7 +16,20 @@ module.exports = class HelpCommand extends BaseCommand {
       'kick': 'Kick a user',
       'purge': 'Bulk delete messages (1 - 99)',
       'say': 'make the bot say something! Specifiy a channel to send the message to another channel.',
-      'setPrefix': 'change the servers prefix'
+      'setPrefix': 'change the servers prefix',
+      '[ DEVELOPER COMMANDS ]': '---------------------------',
+      'competing': 'set bot activity to competing in [message args]',
+      'devhelp': 'display this message',
+      'initGuild': 'initialize a guild that the bot is in already but is not stored in the database',
+      'listeningTo': 'set bot activity to listening to [message args]',
+      'ping': 'display latencey stats',
+      'playing': 'set bot activity to playing [message args]',
+      'query': 'query options: 1 - returns invite codes stored in database. 2 - fetches invites from Discord API. 3 - compares differences of uses from database to Discord API return',
+      'setBotAvatar': 'set the bots avatar [static- avatar cannot be changed through command]',
+      'setBotUsername': 'set the bots username [static- avatar cannot be changed through command]',
+      'streaming': 'set bot activity to streaming [message args]',
+      'updateGuild': 'duplicate of initGuild. Will remove later.',
+      'watching': 'set bot activity to watching [message args]'
     }
     
     const exampleEmbed = new Discord.MessageEmbed()
