@@ -29,7 +29,6 @@ Date: 2/10/2021
 # Previous Updates:
 
 ## v4.4.0
-
 **New Features**
 - Added Listening To command.
 - Added Playing command.
