@@ -6,11 +6,31 @@ Stable: Chaos v4.4
 # Update 4.4.0
 
 ### Chaos: Discord Bot
-Version 4.4.0
-
-Date: 2/9/2021
+Version 4.4.0.1
+Date: 2/10/2021
 
 ## New Features
+- 
+
+
+## Fixed Issues
+- [patch 1] - Fixed front end server not starting. 
+
+
+## Improvements
+- 
+
+
+
+
+
+
+
+# Previous Updates:
+
+## v4.4.0
+
+**New Features**
 - Added Listening To command.
 - Added Playing command.
 - Added Purge command
@@ -28,22 +48,15 @@ Date: 2/9/2021
 - Added Ping command to view latency stats
 - Added permission checks to admin commands
 - Added startTyping() and stopTyping() before and after command run to let users know the bot is working.
+- Added devhelp command
 
-
-## Fixed Issues
-- ...
-
-
-## Improvements
+**Improvements**
 - Changed say command to include channel specification. Specify a channel to send the bot message to!
 - Removed debug logs on messageEvent
+- Fixed help command.
 
 
-### Notes:
-
-
-
-### v4.3.0
+## v4.3.0
 **New Features**
 - Added setPrefix command. Allows server admins to change their guilds prefix inside the Discord Server
 - Added updateGuild command. Allows developer to update stored name inside database that bot is in that hasnt been initialized
