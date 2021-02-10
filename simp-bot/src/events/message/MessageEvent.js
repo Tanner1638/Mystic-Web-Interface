@@ -13,19 +13,9 @@ module.exports = class MessageEvent extends BaseEvent {
     if (message.author.bot) return;
 
 
-    
-
-
     var prefix = "!";
 
-    const guildObject = message.guild;
-    const query = GuildConfig.where({ guildId: guildObject.id});
-    await query.findOne(function (err, guild) {
-      if (err) return handleError(err);
-      if(guild){
-        prefix = guild.get('prefix');
-      }
-    });
+    prefix = await getPrefix(message, prefix);
 
     
     if (message.content.startsWith(prefix)) {
@@ -53,4 +43,17 @@ module.exports = class MessageEvent extends BaseEvent {
       }
     }
   }
+}
+
+async function getPrefix(message, prefix) {
+  const guildObject = message.guild;
+  const query = GuildConfig.where({ guildId: guildObject.id });
+  await query.findOne(function (err, guild) {
+    if (err)
+      return handleError(err);
+    if (guild) {
+      prefix = guild.get('prefix');
+    }
+  });
+  return prefix;
 }
