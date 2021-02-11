@@ -27,6 +27,10 @@ const GuildConfigSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.Array,
         required: false,
     },
+    reactionRoles: {
+        type: mongoose.SchemaTypes.Array,
+        required: false,
+    },
 });
 
 module.exports = mongoose.model('GuildConfig', GuildConfigSchema);

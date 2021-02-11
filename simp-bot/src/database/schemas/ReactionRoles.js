@@ -6,6 +6,16 @@ const ReactionRolesSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    GuildId: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+        unique: false,
+    },
+    Channel: {
+        type: mongoose.SchemaTypes.String,
+        required: true,
+        unique: false,
+    },
     MessageId: {
         type: mongoose.SchemaTypes.String,
         required: true,

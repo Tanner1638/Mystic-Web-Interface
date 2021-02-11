@@ -10,16 +10,7 @@ module.exports = class TestCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-
-    //console.log(args[0])
-    
-    for(var i in emojis){
-      if(emojis[i] == args[0]){
-        console.log("WE FUCKIN FOUND IT")
-      }
-    }
-    console.log('weve faileed')
-    //console.log(emojis.hasOwnProperty('\ud83d\ude0b'))
+    message.channel.send("Test command works! Wonderful!")
     
     
 

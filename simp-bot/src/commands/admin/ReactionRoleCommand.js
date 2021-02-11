@@ -2,6 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 const Discord = require('discord.js')
 const emojis = require('./emoji_map.json');
 const  ReactionRoles  = require('../../database/schemas/ReactionRoles');
+const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
 module.exports = class ReactionRoleCommand extends BaseCommand {
   constructor() {
@@ -26,6 +27,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
         })
         .then(message => {
           message = message.first()
+          
           var targetChannelID = message.content.slice(2,(message.content.length-1));
           var channel = client.channels.cache.get(targetChannelID);
           if(!channel) return message.reply("I couldn't find that channel! Does it exist?");
@@ -137,11 +139,16 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                             try {
                               const reactionRole = await ReactionRoles.create({
                                 ReactionRoleId: reactionRoleId,
+                                GuildId: message.guild.id,
+                                Channel: targetChannelID,
                                 MessageId: targetMessageId,
                                 EmojiId: inputEmoji,
                                 Roles: role.id,
                                 ReactType: '1',
                               });
+
+                              const query = await GuildConfig.findOneAndUpdate({ guildId: message.guild.id }, { $push: { reactionRoles: reactionRoleId } });
+                              console.log(`Reaction boi added: ${reactionRoleId}`);
 
                               channel.messages.fetch(targetMessageId)
                               .then( message => {

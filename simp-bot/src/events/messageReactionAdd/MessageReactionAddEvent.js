@@ -21,9 +21,10 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
         if(reactionMessage) {
             var member = reaction.message.guild.member(user.id);
             
-            member.roles.add(reactionMessage.Roles);
+            return member.roles.add(reactionMessage.Roles);
             
         }
-    })
+        return;
+    });
   }
 }
