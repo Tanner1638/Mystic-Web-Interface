@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + `/../../.env`});
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 //const config = require('../slappey.json');
-const client = new Client();
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
 const mongoose = require('mongoose');
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');

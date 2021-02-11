@@ -3,14 +3,14 @@
 
 Stable: Chaos v4.4
 
-# Update 4.4.0
+# Update 4.4.1
 
 ### Chaos: Discord Bot
-Version 4.4.0.1
+Version 4.4.1
 Date: 2/10/2021
 
 ## New Features
-- 
+- Reaction Roles!!
 
 
 ## Fixed Issues
