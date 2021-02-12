@@ -15,6 +15,10 @@ module.exports = class ListReactionsCommand extends BaseCommand {
     
 
     try {
+      const listEmbed = new Discord.MessageEmbed()
+      .setTitle("Reaction Roles List")
+      .setColor("bf3f3f")
+
       const query = GuildConfig.where({ guildId: message.guild.id });
       await query.findOne(function (err, guild) {
         if (err)
@@ -23,18 +27,10 @@ module.exports = class ListReactionsCommand extends BaseCommand {
           var reactionRoles = guild.get('reactionRoles');
           for(var i in reactionRoles)
           {
-            var reactionQuery = ReactionRoles.where({ ReactionRoleId: reactionRoles[i]});
-             reactionQuery.findOne(function (err, reaction) {
-              if (err)
-              return handleError(err);
-              if (reaction) {
-                const listEmbed = new Discord.MessageEmbed()
-                .setColor("bf3f3f")
-                .addField(`Reaction ID: ${reaction.ReactionRoleId}`, `Emoji: ${reaction.EmojiId}\nMessage ID: ${reaction.MessageId}\nChannel: <#${reaction.Channel}>\nType: ${reaction.ReactType}\nRole: <@&${reaction.Roles}>\nDirect Link: [Click here](https://discord.com/channels/${reaction.GuildId}/${reaction.Channel}/${reaction.MessageId})`);
-                message.channel.send(listEmbed);
-              }
-            })
+            var rrObject = reactionRoles[i];
+            listEmbed.addField(`Reaction ID: ${rrObject.reactionRoleId}`, `Emoji: ${rrObject.emojiId}\nMessage ID: ${rrObject.messageId}\nChannel: <#${rrObject.channelId}>\nType: ${rrObject.type}\nRole: <@&${rrObject.role}>\nDirect Link: [Click here](https://discord.com/channels/${message.guild.id}/${rrObject.channelId}/${rrObject.messageId})`);
           }
+          message.channel.send(listEmbed);
         }
       });
     }

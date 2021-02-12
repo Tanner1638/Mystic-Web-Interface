@@ -10,7 +10,8 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    var time = 180000; //3 minutes
+    var time = 180000; //180000 - 3 minutes
+    var operator = message.author;
 
     const rrEmbed = new Discord.MessageEmbed()
     .setColor('#bf3f3f')
@@ -19,7 +20,8 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
     "You need to reply within 3 minutes of this message before I cancel it, this also goes for every single question that will follow.");
 
     let filter = m => m.author.id === message.author.id
-    message.channel.send(rrEmbed).then(() => {
+    message.channel.send(rrEmbed)
+    .then(() => {
       message.channel.awaitMessages(filter, {
           max: 1,
           time: time,
@@ -37,10 +39,11 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
           // SETUP PART 2
           rrEmbed.setTitle("Reaction Roles - Setup part 2");
           rrEmbed.setDescription(`Nice! Now time to choose your message! Please send me your message id\nMake **sure** the message is in the ${message}\n` + 
-          `To add multiple roles to a message choose the same id!\n\n **Example (Do not use this ID as it will not work for you!)\n`+ 
+          `To add multiple roles to a message choose the same id!\n\n **Example (Do not use this ID as it will not work for you!)**\n`+ 
           `809242336563429416`);
           message.channel.bulkDelete(2);
-          message.channel.send(rrEmbed).then(() => {
+          message.channel.send(rrEmbed)
+          .then(() => {
             message.channel.awaitMessages(filter, {
                 max: 1,
                 time: time,
@@ -48,45 +51,38 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
               })
             .then(message => {
               message = message.first()
-              var targetMessageId = message.content;
-              var msg = channel.messages.fetch(targetMessageId)
+              var targetMessageId = message.content
+              channel.messages.fetch(targetMessageId)
               .then(() => {
                 message.channel.awaitMessages(filter, {
                   max: 1,
                   time: time,
                   errors: ['time']
                 })
+                
                 // SETUP PART 3
                 rrEmbed.setTitle("Reaction Roles - Setup part 3");
-                rrEmbed.setDescription(`Awesome! Now time to choose your emoji! **DO NOT USE NITRO EMOJIS THAT ARE NOT IN THIS GUILD (I have no way of accessing them)**`);
-                message.channel.bulkDelete(2);
+                rrEmbed.setDescription(`Awesome! Now time to choose your emoji!\n\n*DO NOT USE NITRO EMOJIS THAT ARE NOT IN THIS GUILD (I have no way of accessing them)*\n\n**Please react to this message with the emoji you'd like to use**`);
+                message.channel.bulkDelete(1);
                 message.channel.send(rrEmbed)
-                .then(() => {
-                  message.channel.awaitMessages(filter, {
-                      max: 1,
-                      time: time,
-                      errors: ['time']
-                    })
-                  .then(message => {
-                    message = message.first();
-                    var inputEmoji = message.content;
-                    if(inputEmoji.startsWith('<')){
-                      var emojiArgs = message.content.slice(1,message.content.length-1).trim().split(/:+/);
-                      var emojiId = emojiArgs[2];
-                      if(!client.emojis.cache.get(emojiArgs[2])){
-                        return message.reply("I couldn't find this emoji! Is it in the guild?");
-                      }
-                    }
-                    else {
-                      var emojiExists = false;
-                      for(var i in emojis){
-                        if(emojis[i] == inputEmoji){
-                          emojiExists = true;
-                        }
-                      }
-                      if(!emojiExists){
-                        return message.reply("I couldn't find this emoji! Is it in Discord?");
-                      }
+                .then(message => {
+                  message.awaitReactions((reaction, user) => user.id == operator.id, {
+                    max: 1,
+                    time: time,
+                    errors: ['time']
+                  })
+                  
+                  .then(async emoji => {
+                    emoji = emoji.first();
+                    
+            
+                    console.log("Reaction Recieved.");
+                    console.log(emoji._emoji);
+            
+                    var actualEmoji = emoji._emoji.toString();
+            
+                    if(emoji._emoji.id == null){
+                      actualEmoji = emoji._emoji.name;
                     }
                     // END OF PART 3 ^^^
   
@@ -108,59 +104,57 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                         if (targetRoleId.startsWith('<@')) {
                           targetRoleId = targetRoleId.slice(3, targetRoleId.length - 1);
                           var role = message.guild.roles.cache.get(targetRoleId);
-                        } else {
+                        }
+                        else {
                           var role = message.guild.roles.cache.find(role => role.name.toLowerCase() == targetRoleId.toLowerCase());
                           if (!role) return message.reply("I couldn't find that role! Did you spell it right?");
                           targetRoleId = role.id;
                         }
 
 
-
                         message.channel.bulkDelete(2);
                         //Skipping Part 5::::
                         var date = Date.now();
-                            var reactionRoleId = '';
-                            reactionRoleId += targetMessageId.slice(targetMessageId.length-3,targetMessageId.length) + targetChannelID.slice(targetChannelID.length-3,targetChannelID.length) + date;
+                        var reactionRoleId = '';
+                        reactionRoleId += targetMessageId.slice(targetMessageId.length-3,targetMessageId.length) + targetChannelID.slice(targetChannelID.length-3,targetChannelID.length) + date;
 
-                            const finalEmbed = new Discord.MessageEmbed()
-                            .setColor('#bf3f3f')
-                            .setTitle('Reaction Roles - Setup Done')
-                            .addFields(
-                              { name: 'Reaction ID', value: reactionRoleId, inline: true },
-                              { name: 'Emoji', value: inputEmoji, inline: true },
-                              { name: 'Type', value: '1', inline: true },
-                              { name: 'MessageID', value: targetMessageId, inline: true },
-                              { name: 'Channel', value: `<#${targetChannelID}>`, inline: true },
-                              { name: 'Role', value: `<@&${role.id}>`, inline: true },
-                            );
+                        const finalEmbed = new Discord.MessageEmbed()
+                        .setColor('#bf3f3f')
+                        .setTitle('Reaction Roles - Setup Done')
+                        .addFields(
+                          { name: 'Reaction ID', value: reactionRoleId, inline: true },
+                          { name: 'Emoji', value: actualEmoji, inline: true },
+                          { name: 'Type', value: '1', inline: true },
+                          { name: 'MessageID', value: targetMessageId, inline: true },
+                          { name: 'Channel', value: `<#${targetChannelID}>`, inline: true },
+                          { name: 'Role', value: `<@&${role.id}>`, inline: true },
+                        );
 
 
-                            //Send to database
-                            try {
-                              const reactionRole = await ReactionRoles.create({
-                                ReactionRoleId: reactionRoleId,
-                                GuildId: message.guild.id,
-                                Channel: targetChannelID,
-                                MessageId: targetMessageId,
-                                EmojiId: inputEmoji,
-                                Roles: role.id,
-                                ReactType: '1',
-                              });
+                        //Send to database
+                        var reactionRoleObject = {
+                          reactionRoleId: reactionRoleId,
+                          //guildId: message.guild.id,
+                          channelId: targetChannelID,
+                          messageId: targetMessageId,
+                          emojiId: actualEmoji,
+                          role: role.id,
+                          type: '1',
+                        }
+                        try {
+                          await GuildConfig.findOneAndUpdate({ guildId: message.guild.id }, { $push: { reactionRoles: reactionRoleObject } });
+                          console.log(`Reaction Role Added To: ${message.guild.name}`);
 
-                              const query = await GuildConfig.findOneAndUpdate({ guildId: message.guild.id }, { $push: { reactionRoles: reactionRoleId } });
-                              console.log(`Reaction boi added: ${reactionRoleId}`);
-
-                              channel.messages.fetch(targetMessageId)
-                              .then( message => {
-                                message.react(inputEmoji);
-                              })
-                          
-                              console.log('Reaction Role Created!. Saved to DB');
-                              message.channel.send(finalEmbed);
-                            } catch (err) {
-                              message.channel.send(`An error has occured! Cannot complete action.`);
-                              console.log(err);
-                            }
+                          channel.messages.fetch(targetMessageId)
+                          .then( message => {
+                            message.react(actualEmoji);
+                          })
+                          message.channel.send(finalEmbed);
+                        }
+                        catch (err) {
+                          message.channel.send(`An error has occured! Cannot complete action.`);
+                          console.log(err);
+                        }
                         
 
 
@@ -192,29 +186,37 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                         //   //   message.channel.send('Timeout 5');
                         //   // });
                         // })
+                      
                       })
                       .catch(collected => {
-                        message.channel.send('Reaction Roles canceled: Took too long to respond.');
+                        message.channel.bulkDelete(1);
+                        return message.channel.send('Reaction Roles canceled 4');
                       });
                     })
                   })
                   .catch(collected => {
-                    message.channel.send('Reaction Roles canceled: Took too long to respond.');
+                    message.channel.bulkDelete(1);
+                    return message.channel.send('Reaction Roles canceled 3');
                   });
                 })
               })
               .catch(collected => {
-                message.reply(`I couldnt find a message with that ID in <#${channel.id}>`);
+                message.channel.bulkDelete(1);
+                return message.reply(`I couldnt find a message with that ID in <#${channel.id}>`);
               });
             })
             .catch(collected => {
-              message.channel.send('Reaction Roles canceled: Took too long to respond.');
+              message.channel.bulkDelete(1);
+              return message.channel.send('Reaction Roles canceled 2');
             });
           })
         })
         .catch(collected => {
-            message.channel.send('Reaction Roles canceled: Took too long to respond.');
+          message.channel.bulkDelete(1);
+          return message.channel.send('Reaction Roles canceled 1');
         });
+      
     })
+    
   }
 }

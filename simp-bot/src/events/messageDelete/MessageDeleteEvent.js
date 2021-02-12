@@ -1,5 +1,6 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
+//const  ReactionRoles  = require('../../database/schemas/ReactionRoles');
 
 /**
  * initiates when new member joins
@@ -11,10 +12,20 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
     super('messageDelete');
   }
   async run (client, message) {
-    console.log(`${message.id} was deleted!`);
-  // Partial messages do not contain any content so skip them
+
+
+    //This will remove the invite link to the database
+    try {
+        await GuildConfig.findOneAndUpdate({ guildId: message.guild.id}, { $pull: {reactionRoles: {messageId: message.id}}});
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+
+  
   if (!message.partial) {
-    console.log(`It had content: "${message.content}"`);
+    //console.log(`It had content: "${message.content}"`);
   }
   }
 }

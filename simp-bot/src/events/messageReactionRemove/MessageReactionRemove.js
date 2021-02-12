@@ -1,5 +1,5 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
-const  ReactionRoles  = require('../../database/schemas/ReactionRoles');
+const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
 /**
  * initiates when user reacts to a message.
@@ -11,17 +11,32 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
     super('messageReactionRemove');
   }
   async run (client, reaction, user) {
+    if(user.bot) return;
 
-    const messageObject = reaction.message;
-    const query = ReactionRoles.where({ MessageId: messageObject.id, EmojiId: reaction.emoji });
-    await query.findOne(function (err, reactionMessage) {
+
+    const message = reaction.message;
+    var emji = reaction.emoji
+
+    var emoji = emji.toString();
+    
+
+    const query = GuildConfig.where({ guildId: message.guild.id});
+    await query.findOne(function (err, guild) {
         if (err) {
             return handleError(err);
         }
-        if(reactionMessage) {
-            var member = reaction.message.guild.member(user.id);
-            member.roles.remove(reactionMessage.Roles);
+
+        if(guild) {
+          var reactionRoles = guild.reactionRoles;
+          for(var i in reactionRoles){
+            if(reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id){
+
+              var member = reaction.message.guild.member(user.id);
+              member.roles.remove(reactionRoles[i].role);
+            }
+          }
         }
-    })
+        return;
+    });
   }
 }

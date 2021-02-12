@@ -3,11 +3,11 @@
 
 Stable: Chaos v4.4
 
-# Update 4.4.2
+# Update 4.4.2.1
 
 ### Chaos: Discord Bot
-Version 4.4.2
-Date: 2/11/2021
+Version 4.4.2.1
+Date: 2/12/2021
 
 ## New Features
 - Reaction Roles!!
@@ -15,13 +15,16 @@ Date: 2/11/2021
 - List reaction roles
 
 
-
 ## Fixed Issues
-- [patch 1] - Fixed front end server not starting. 
+-
 
 
 ## Improvements
 - Added !dashboard to help embeds.
+- Migrated reaction roles into GuildConfig collection
+- Reaction roles now saves emojis as their toString() form.
+- Fixed List Reaction Roles command so now everything goes on one embed
+- Reaction roles now automatically delete upon message deletion.
 
 
 
