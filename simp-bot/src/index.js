@@ -6,7 +6,7 @@ const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
 const mongoose = require('mongoose');
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
-const botOnly = false;
+const botOnly = true;
 
 
 mongoose.connect(process.env.MONGODB_URL, {

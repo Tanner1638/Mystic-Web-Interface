@@ -7,7 +7,7 @@ module.exports = class ReadyEvent extends BaseEvent {
   async run (client) {
     console.log(client.user.tag + ' has logged in.');
 
-    //maintenanceMode(client);
+    maintenanceMode(client);
 
     
   }
