@@ -3,16 +3,17 @@
 
 Stable: Chaos v4.4
 
-# Update 4.4.2.1
+# Update 4.4.3
 
 ### Chaos: Discord Bot
-Version 4.4.2.1
+Version 4.4.3
 Date: 2/12/2021
 
 ## New Features
 - Reaction Roles!!
 - Create reaction roles
 - List reaction roles
+- Remove Reaction Role command
 
 
 ## Fixed Issues

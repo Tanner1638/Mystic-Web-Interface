@@ -1,54 +1,77 @@
-const ReactionRoles = require('../../database/schemas/ReactionRoles');
 const BaseCommand = require('../../utils/structures/BaseCommand');
-const  GuildConfig  = require('../../database/schemas/GuildConfig');
+const GuildConfig = require('../../database/schemas/GuildConfig');
+const Discord = require('discord.js');
 
 module.exports = class RemoveReactionRoleCommand extends BaseCommand {
   constructor() {
-    super('removeReactionRole', 'admin', []);
+    super('removeReactionRole', 'admin', ["rrr"]);
   }
 
   async run(client, message, args) {
-    return message.reply("This command is currently disabled :(");
-    try {
-      //console.log('fucking work')
-      const query = GuildConfig.where({ guildId: message.guild.id });
-      await query.findOne(function (err, guild) {
-        if (err)
-          return handleError(err);
-        if (guild) {
-          //console.log("We found a guild.")
-          var reactionRoles = guild.get('reactionRoles');
-          for(var i in reactionRoles)
-          {
-            //console.log(`Checking reactionroles: ${i}: ${reactionRoles[i]}`)
-            
-            var reactionQuery = ReactionRoles.where({ ReactionRoleId: reactionRoles[i]});
-             reactionQuery.findOne(function (err, reaction) {
-              if (err)
-              return handleError(err);
-              if (reaction) {
-                if(reaction.ReactionRoleId == args[0]){
-                  console.log("we also found it in reactionroles");
-                  console.log(`ObjectID: ${reaction._id}`);
-                  ReactionRoles.deleteOne({ReactionRoleId: reaction.ReactionRoleId});
-                }
-                
-                
-                
+    var time = 60000;
+    //return message.reply("This command is currently disabled :(");
+    const MessageInfo = new Discord.MessageEmbed()
+      .setTitle("Reaction Roles - Message Information")
+      .setColor("bf3f3f")
+      .setDescription("What is the **Reaction ID** of the reaction emoji you want to remove?");
 
-              }
-            })
-            if(reactionRoles[i] == args[0]){
-              console.log("Yep we found this one in the guildconfigs");
+    message.channel.send(MessageInfo);
 
-            }
-          }
+    let filter = m => m.author.id === message.author.id
+
+    const listEmbed = new Discord.MessageEmbed()
+      .setTitle("Reaction Roles List")
+      .setColor("bf3f3f")
+
+    const query = GuildConfig.where({
+      guildId: message.guild.id
+    });
+    await query.findOne(function (err, guild) {
+      if (err)
+        return handleError(err);
+      if (guild) {
+        var reactionRoles = guild.get('reactionRoles');
+        for (var i in reactionRoles) {
+          var rrObject = reactionRoles[i];
+          listEmbed.addField(`Reaction ID: ${rrObject.reactionRoleId}`, `Emoji: ${rrObject.emojiId}\nMessage ID: ${rrObject.messageId}\nChannel: <#${rrObject.channelId}>\nType: ${rrObject.type}\nRole: <@&${rrObject.role}>\nDirect Link: [Click here](https://discord.com/channels/${message.guild.id}/${rrObject.channelId}/${rrObject.messageId})`);
         }
-      });
-      //await GuildConfig.findOneAndUpdate({ guildId: guildObject.id}, { $pull: {reactionRoles: args[0]}});
-    }
-    catch{
-      console.error();
-    }
+        message.channel.send(listEmbed)
+          
+      }
+    })
+    .then(() => {
+      message.channel.awaitMessages(filter, {
+          max: 1,
+          time: time,
+          errors: ['time']
+        })
+        .then(async message => {
+          message = message.first()
+          var args = message.content.trim().split(/\s+/);
+          await GuildConfig.findOneAndUpdate({ guildId: message.guild.id}, { $pull: {reactionRoles: {reactionRoleId: args[0]}}});
+
+          await message.channel.bulkDelete(3);
+          MessageInfo.setTitle("Reaction Role Deleted!");
+          MessageInfo.setDescription("I have removed that emoji from my database.")
+          
+          message.channel.send(MessageInfo)
+          .then(message => {
+            message.delete({ timeout: 5000});
+          })
+          .catch(err => {
+            throw err
+          });
+
+
+        })
+        .catch(collected => {
+          message.channel.send("Remove Reaction Role Canceled!");
+        })
+
+    })
+    .catch(collected => {
+      message.channel.send("You took too long!")
+    })
+
   }
 }

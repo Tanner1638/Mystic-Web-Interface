@@ -4,12 +4,14 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 //const config = require('../slappey.json');
 const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
 const botOnly = true;
 
 
 mongoose.connect(process.env.MONGODB_URL, {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -19,6 +21,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("We connected to the database!!!");
 });
+
 
 
 (async () => {

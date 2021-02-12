@@ -74,10 +74,6 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                   
                   .then(async emoji => {
                     emoji = emoji.first();
-                    
-            
-                    console.log("Reaction Recieved.");
-                    console.log(emoji._emoji);
             
                     var actualEmoji = emoji._emoji.toString();
             

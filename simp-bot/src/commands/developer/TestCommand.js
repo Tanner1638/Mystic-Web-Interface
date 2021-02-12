@@ -10,45 +10,9 @@ module.exports = class TestCommand extends BaseCommand {
 
   async run(client, message, args) {
 
-    var operator = message.author;
-    var msg = message;
-    //message.channel.send("Test command works! Wonderful!")
+    message.channel.send("Test command works! Wonderful!")
 
-    let filter = m => m.author.id === message.author.id
-    message.channel.send("Yes React To this message")
-    .then(message => {
-      message.awaitReactions((reaction, user) => user.id == operator.id, {
-        max: 1,
-        time: 10000,
-        errors: ['time']
-      })
-      .then(async emoji => {
-        emoji = emoji.first();
-        
-
-        console.log("Reaction Recieved.");
-        console.log(emoji._emoji);
-
-        var actualEmoji = emoji._emoji.toString();
-
-        if(emoji._emoji.id == null){
-          actualEmoji = emoji._emoji.name;
-        }
-
-
-
-        var reactionRoleObject = {
-          //guildId: message.guild.id,
-          //channelId: targetChannelID,
-          messageId: message.id,
-          emojiId: actualEmoji,
-          role: '807859278820016180',
-          type: '1',
-        }
-        await GuildConfig.findOneAndUpdate({ guildId: message.guild.id }, { $push: { reactionRoles: reactionRoleObject } });
-        
-      })
-    })
+    
 
 
     //shutDownFunction(message, operator, msg);
