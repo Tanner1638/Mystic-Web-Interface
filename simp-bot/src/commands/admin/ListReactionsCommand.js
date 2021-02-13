@@ -7,7 +7,6 @@ module.exports = class ListReactionsCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    console.time('ListReactions Command');
 
     const listEmbed = new Discord.MessageEmbed()
     .setTitle("Reaction Roles List")
@@ -21,6 +20,5 @@ module.exports = class ListReactionsCommand extends BaseCommand {
     }
     message.channel.send(listEmbed);
     
-    console.timeEnd('ListReactions Command');
   }
 }

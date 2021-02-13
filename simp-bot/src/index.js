@@ -7,11 +7,10 @@ const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
-const botOnly = true;
+const botOnly = false;
 const NodeCache = require( "node-cache" );
 
 // Cached Data
-//global.prefixCache = new NodeCache();
 global.guildCache = new NodeCache();
 
 
@@ -31,7 +30,7 @@ db.once('open', function() {
 
 
 (async () => {
-  //console.time('async load');
+  console.time('Initializing Bot');
   client.commands = new Map();
   client.events = new Map();
   client.prefixes = new Map();
@@ -42,6 +41,5 @@ db.once('open', function() {
   if(!botOnly) {
     a.load(() => a.run("dash"));
   }
-  //console.timeEnd('async load');
+  console.timeEnd('Initializing Bot');
 })();
-////console.timeEnd('Bot Index.js');

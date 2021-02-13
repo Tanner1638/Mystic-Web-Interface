@@ -15,13 +15,11 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
-    console.time("Message Event");
     
     var server = guildCache.get(message.guild.id);
     
     if(server == undefined){
       cacheGuild(message.guild.id);
-      console.timeEnd("Message Event");
       return;
     }
     var prefix = server.prefix;
@@ -53,7 +51,6 @@ module.exports = class MessageEvent extends BaseEvent {
         message.channel.stopTyping();
       }
     }
-    console.timeEnd("Message Event");
   }
 }
 

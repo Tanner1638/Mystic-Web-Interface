@@ -14,36 +14,32 @@ module.exports = class HelpCommand extends BaseCommand {
 
 
   run(client, message, args) {
-    //console.time('Help Command');
 
-    const commands = {
-      '!help': 'Displays this message!',
-      '\u200b': `\u200b`,
-      '[ ADMIN COMMANDS ]': `\u200b`,
-      '!inviteRole | !ir': 'Link a role for users to be given upon joining a specific invite link',
-      '!ban': 'Ban a user, optional to provide a reason [reason will show up in the audit log]',
-      '!dashboard': 'Sends an embed with a link straight to the dashboard!',
-      '!kick': 'Kick a user',
-      '!purge': 'Bulk delete messages (1 - 99)',
-      '!say': 'make the bot say something! Specifiy a channel to send the message to another channel.',
-      '!reactionRole | !rr': 'Make reaction roles! Users can react to an emoji and receive a role!',
-      '!listReactions | !lr': 'Lists all reaction roles setup.',
-      '!removeRole | !rrr': 'Remove an active reaction role',
-      '!setPrefix | !sp': 'change the servers prefix'
-    }
+    const prefix = guildCache.get(message.guild.id).prefix;
+
     
     const exampleEmbed = new Discord.MessageEmbed()
     .setColor('#bf3f3f')
     .setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png")
     .setTitle("Chaos Bot Commands")
-    .setDescription("NOTE: Replace ! with your custom prefix if you've set one!");
-    //.setFooter('Some footer text here', `https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png`);
-
-    for(var command in commands){
-      exampleEmbed.addField(`**${command}**`, ` • ${commands[command]}`);
-    }
+    .setDescription(`
+    Most of the commands will better instruct you on how to use them if you don't give any following arguments (AKA just say the command)\n
+    **${prefix}help** Displays this message!\n
+    **[ ADMIN COMMANDS ]**\n
+    **${prefix}setPrefix** | **${prefix}sp** - change the servers prefix\n
+    **${prefix}kick** - Kick a user\n
+    **${prefix}ban** - Ban a user, optional to provide a reason [reason will show up in the audit log]\n
+    **${prefix}say** - make the bot say something! Specifiy a channel to send the message to another channel.\n
+    **${prefix}purge** - Bulk delete messages (1 - 99)\n
+    **${prefix}inviteRole** | **${prefix}ir** - Link a role for users to be given upon joining a specific invite link\n
+    **${prefix}reactionRole** | **${prefix}rr** - Make reaction roles! Users can react to an emoji and receive a role!\n
+    **${prefix}listReactions** | **${prefix}lr** - Lists all reaction roles setup.\n
+    **${prefix}removeRole** | **${prefix}rrr** - Remove an active reaction role\n
+    **${prefix}dashboard** - Sends an embed with a link straight to the dashboard!\n
+    `);
     
     message.channel.send(exampleEmbed);
-    //console.timeEnd('Help Command');
   }
 }
+
+    

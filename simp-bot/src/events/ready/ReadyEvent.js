@@ -1,5 +1,4 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
-console.time('readyevent.js');
 
 module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
@@ -8,7 +7,7 @@ module.exports = class ReadyEvent extends BaseEvent {
   async run (client) {
     console.log(client.user.tag + ' has logged in.');
 
-    maintenanceMode(client);
+    //maintenanceMode(client);
 
     
   }
@@ -21,4 +20,3 @@ function maintenanceMode(client) {
     url: "https://www.twitch.tv/zvmysticvz"
   }).catch(console.error);
 }
-console.timeEnd('readyevent.js');

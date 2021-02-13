@@ -15,7 +15,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
   }
   async run (client, reaction, user) {
     if(user.bot) return;
-    console.time('ReactionAdd');
+    
 
 
     const message = reaction.message;
@@ -36,7 +36,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
           addRole(guild, emoji, message, user);
         }
       });
-      console.timeEnd('ReactionAdd');
+      
       return;
     }
 
