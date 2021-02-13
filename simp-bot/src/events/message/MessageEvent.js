@@ -1,6 +1,9 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
 const Discord = require('discord.js');
+const cacheGuild = require('../../cache/cache');
+
+//const NodeCache = require( "node-cache" ); - remove later
 //const React = require('react');
 //const useQuery = require('@apollo/client');
 
@@ -12,27 +15,17 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
-    //console.time('MessageEvent.js');
+    console.time("Message Event");
     
+    var server = guildCache.get(message.guild.id);
     
-
-    var prefix = "!";
-    //prefix = await getPrefix(message);
-    const guildObject = message.guild;
-    const query = GuildConfig.where({ guildId: guildObject.id });
-    await query.findOne(function (err, guild) {
-      if (err)
-        return handleError(err);
-      if (guild) {
-        prefix = guild.get('prefix');
-      }
-    });
-    
-    
-    if(!message.content.startsWith(prefix)) {
-      //console.timeEnd('MessageEvent.js');
-      return 
+    if(server == undefined){
+      cacheGuild(message.guild.id);
+      console.timeEnd("Message Event");
+      return;
     }
+    var prefix = server.prefix;
+    
 
     if (message.content.startsWith(prefix)) {
       //console.log(`Guild: ${message.guild.name}. ${message.author.username}: ${message.content}`);
@@ -56,26 +49,14 @@ module.exports = class MessageEvent extends BaseEvent {
         }
         
         command.run(client, message, cmdArgs);
-        commandLog(client, message);
+        //commandLog(client, message);
         message.channel.stopTyping();
       }
     }
-    //console.timeEnd('MessageEvent.js');
+    console.timeEnd("Message Event");
   }
 }
 
-async function getPrefix(message) {
-  const guildObject = message.guild;
-  const query = GuildConfig.where({ guildId: guildObject.id });
-  await query.findOne(function (err, guild) {
-    if (err)
-      return handleError(err);
-    if (guild) {
-      return guild.get('prefix');
-    }
-  });
-  return prefix;
-}
 
 function commandLog(client, message) {
   var targetGuild = '807844741793316925'; //Mystic Code
@@ -92,7 +73,7 @@ function commandLog(client, message) {
       .setTitle(`Command Used!`)
       .setColor("bf3f3f")
       .setTimestamp()
-      .setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png")
+      .setThumbnail(`https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}`)
       .setDescription(`**${message.author.username}** has used a command in the **${message.guild.name}** server!\n\n${message.content}\n
       ---------------------------------------------------------------------
       `);

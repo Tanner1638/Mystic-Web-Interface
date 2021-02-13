@@ -1,6 +1,9 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
+const NodeCache = require( "node-cache" );
+
+
 /**
  * initiates when user reacts to a message.
  * @version 4.4.1
@@ -12,31 +15,42 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
   }
   async run (client, reaction, user) {
     if(user.bot) return;
+    console.time('ReactionAdd');
 
 
     const message = reaction.message;
-    var emji = reaction.emoji
-
-    var emoji = emji.toString();
+    const emoji = reaction.emoji.toString();
     
-
-    const query = GuildConfig.where({ guildId: message.guild.id});
-    await query.findOne(function (err, guild) {
+    var server = guildCache.get(message.guild.id);
+    if(server == undefined){
+      
+      const query = GuildConfig.where({ guildId: message.guild.id});
+      await query.findOne(function (err, guild) {
         if (err) {
             return handleError(err);
         }
 
         if(guild) {
-          var reactionRoles = guild.reactionRoles;
-          for(var i in reactionRoles){
-            if(reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id){
+          server = guildCache.set(message.guild.id, guild, 300);
 
-              var member = reaction.message.guild.member(user.id);
-              member.roles.add(reactionRoles[i].role);
-            }
-          }
+          addRole(guild, emoji, message, user);
         }
-        return;
-    });
+      });
+      console.timeEnd('ReactionAdd');
+      return;
+    }
+
+    addRole(server, emoji, message, user);
+  }
+}
+
+
+function addRole(server, emoji, message, user) {
+  const reactionRoles = server.reactionRoles;
+  for (var i in reactionRoles) {
+    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id) {
+      const member = message.guild.member(user.id);
+      member.roles.add(reactionRoles[i].role);
+    }
   }
 }

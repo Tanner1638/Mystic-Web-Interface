@@ -8,8 +8,13 @@ mongoose.set('useFindAndModify', false);
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
 const botOnly = true;
+const NodeCache = require( "node-cache" );
 
-////console.time('Bot Index.js');
+// Cached Data
+//global.prefixCache = new NodeCache();
+global.guildCache = new NodeCache();
+
+
 
 mongoose.connect(process.env.MONGODB_URL, {
   useCreateIndex: true,

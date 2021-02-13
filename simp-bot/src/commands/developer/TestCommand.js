@@ -1,7 +1,10 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
-const emojis = require('../admin/emoji_map.json');
-const ReactionRoles = require('../../database/schemas/ReactionRoles');
-const GuildConfig = require('../../database/schemas/GuildConfig');
+var add = require('../../cache/cache');
+// const emojis = require('../admin/emoji_map.json');
+// const ReactionRoles = require('../../database/schemas/ReactionRoles');
+// const GuildConfig = require('../../database/schemas/GuildConfig');
+const NodeCache = require( "node-cache" );
+// const myCache = new NodeCache();
 
 module.exports = class TestCommand extends BaseCommand {
   constructor() {
@@ -9,10 +12,20 @@ module.exports = class TestCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-
     message.channel.send("Test command works! Wonderful!")
 
+    // var count = 1;
+    // console.log(`Count Before func: ${count}`);
+    // count = add(count);
+    // console.log(`Count after: ${count}`);
+    // count = add(count);
+    // console.log(`Count after: ${count}`);
+
+    //console.log(`Cached Prefix: ${prefixCache.get(message.guild.id)}`);
     
+    
+
+
 
 
     //shutDownFunction(message, operator, msg);

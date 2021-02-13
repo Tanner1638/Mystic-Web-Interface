@@ -1,4 +1,5 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
+console.time('readyevent.js');
 
 module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
@@ -20,3 +21,4 @@ function maintenanceMode(client) {
     url: "https://www.twitch.tv/zvmysticvz"
   }).catch(console.error);
 }
+console.timeEnd('readyevent.js');

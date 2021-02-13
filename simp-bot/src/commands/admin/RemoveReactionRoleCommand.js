@@ -23,22 +23,15 @@ module.exports = class RemoveReactionRoleCommand extends BaseCommand {
       .setTitle("Reaction Roles List")
       .setColor("bf3f3f")
 
-    const query = GuildConfig.where({
-      guildId: message.guild.id
-    });
-    await query.findOne(function (err, guild) {
-      if (err)
-        return handleError(err);
-      if (guild) {
-        var reactionRoles = guild.get('reactionRoles');
-        for (var i in reactionRoles) {
-          var rrObject = reactionRoles[i];
-          listEmbed.addField(`Reaction ID: ${rrObject.reactionRoleId}`, `Emoji: ${rrObject.emojiId}\nMessage ID: ${rrObject.messageId}\nChannel: <#${rrObject.channelId}>\nType: ${rrObject.type}\nRole: <@&${rrObject.role}>\nDirect Link: [Click here](https://discord.com/channels/${message.guild.id}/${rrObject.channelId}/${rrObject.messageId})`);
-        }
-        message.channel.send(listEmbed)
-          
-      }
-    })
+
+
+    var server = guildCache.get(message.guild.id);
+    var reactionRoles = server.reactionRoles;
+    for (var i in reactionRoles) {
+      var rrObject = reactionRoles[i];
+      listEmbed.addField(`Reaction ID: ${rrObject.reactionRoleId}`, `Emoji: ${rrObject.emojiId}\nMessage ID: ${rrObject.messageId}\nChannel: <#${rrObject.channelId}>\nType: ${rrObject.type}\nRole: <@&${rrObject.role}>\nDirect Link: [Click here](https://discord.com/channels/${message.guild.id}/${rrObject.channelId}/${rrObject.messageId})`);
+    }
+    message.channel.send(listEmbed)
     .then(() => {
       message.channel.awaitMessages(filter, {
           max: 1,

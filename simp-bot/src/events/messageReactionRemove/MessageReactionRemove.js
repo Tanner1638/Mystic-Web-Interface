@@ -15,28 +15,37 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
 
 
     const message = reaction.message;
-    var emji = reaction.emoji
-
-    var emoji = emji.toString();
+    const emoji = reaction.emoji.toString();
     
-
-    const query = GuildConfig.where({ guildId: message.guild.id});
-    await query.findOne(function (err, guild) {
+    var server = guildCache.get(message.guild.id);
+    if(server == undefined){
+      
+      const query = GuildConfig.where({ guildId: message.guild.id});
+      await query.findOne(function (err, guild) {
         if (err) {
             return handleError(err);
         }
 
         if(guild) {
-          var reactionRoles = guild.reactionRoles;
-          for(var i in reactionRoles){
-            if(reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id){
+          server = guildCache.set(message.guild.id, guild, 300);
 
-              var member = reaction.message.guild.member(user.id);
-              member.roles.remove(reactionRoles[i].role);
-            }
-          }
+          removeRole(guild, emoji, message, user);
         }
-        return;
-    });
+      });
+      return;
+    }
+
+    removeRole(server, emoji, message, user);
+  }
+}
+
+
+function removeRole(server, emoji, message, user) {
+  const reactionRoles = server.reactionRoles;
+  for (var i in reactionRoles) {
+    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id) {
+      const member = message.guild.member(user.id);
+      member.roles.remove(reactionRoles[i].role);
+    }
   }
 }

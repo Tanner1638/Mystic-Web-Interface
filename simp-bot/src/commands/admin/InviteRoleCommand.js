@@ -7,6 +7,7 @@ const Discord = require('discord.js');
  * @version 4.3.7
  * 
  * needs to retrieve: role, inviteURL or code
+ * @TODO #77
  */
 
 module.exports = class InviteRoleCommand extends BaseCommand {
