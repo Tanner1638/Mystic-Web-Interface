@@ -1,5 +1,6 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
+const Discord = require('discord.js');
 
 /**
  * Used to update the GuildConfig database for any guilds already initialized
@@ -8,7 +9,7 @@ const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
 module.exports = class SetPrefixCommand extends BaseCommand {
   constructor() {
-    super('setPrefix', 'admin', []);
+    super('setprefix', 'admin', ["sp"]);
   }
 
   async run(client, message, args) {
@@ -34,7 +35,20 @@ module.exports = class SetPrefixCommand extends BaseCommand {
 
       const guildObject = message.guild;
       const query = await GuildConfig.findOneAndUpdate({ guildId: guildObject.id}, {prefix: newPrefix});
-      message.channel.send(`Prefix changed! New prefix: ${args[0]}`);
+      const info = new Discord.MessageEmbed()
+      .setTitle("Prefix Changed!")
+      .setColor("bf3f3f")
+      .setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png")
+      .setDescription(`
+      The new prefix is: ${newPrefix}\n\n
+      Examples:
+      ${newPrefix}help, ${newPrefix}kick, ${newPrefix}ban, ${newPrefix}say, etc...
+      `);
+
+      message.channel.send(info)
+      .then(message => {
+        message.member.setNickname(`𝕮𝖍𝖆𝖔𝖘 ${newPrefix}`);
+      });
     } catch (err) {
       message.channel.send('An Error has occured! I cannot Complete this action.');
       console.log(err);

@@ -9,6 +9,7 @@ const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
 const botOnly = true;
 
+////console.time('Bot Index.js');
 
 mongoose.connect(process.env.MONGODB_URL, {
   useCreateIndex: true,
@@ -25,6 +26,7 @@ db.once('open', function() {
 
 
 (async () => {
+  //console.time('async load');
   client.commands = new Map();
   client.events = new Map();
   client.prefixes = new Map();
@@ -35,6 +37,6 @@ db.once('open', function() {
   if(!botOnly) {
     a.load(() => a.run("dash"));
   }
+  //console.timeEnd('async load');
 })();
-
-
+////console.timeEnd('Bot Index.js');

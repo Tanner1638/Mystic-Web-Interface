@@ -7,7 +7,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class ListeningToCommand extends BaseCommand {
   constructor() {
-    super('listeningto', 'developer', ["listeningTo"]);
+    super('listeningto', 'developer', []);
   }
 
   run(client, message, args) {

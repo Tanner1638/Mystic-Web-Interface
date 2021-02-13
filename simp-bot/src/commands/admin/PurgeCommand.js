@@ -11,7 +11,8 @@ module.exports = class PurgeCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    let time = 5000; //5 Seconds
+    //console.time('Purge Command');
+    let time = 2000; //2 Seconds
 
     if(!message.member.permissions.has('MANAGE_MESSAGES')) {
       message.channel.bulkDelete(1);
@@ -52,6 +53,6 @@ module.exports = class PurgeCommand extends BaseCommand {
       });
 
     }
-    
+    //console.timeEnd('Purge Command');
   }
 }

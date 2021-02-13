@@ -6,10 +6,11 @@ const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
 module.exports = class ReactionRoleCommand extends BaseCommand {
   constructor() {
-    super('reactionRole', 'admin', ["rr"]);
+    super('reactionrole', 'admin', ["rr"]);
   }
 
   run(client, message, args) {
+    //console.time('ReactionRole Command');
     var time = 180000; //180000 - 3 minutes
     var operator = message.author;
 
@@ -61,9 +62,10 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                 })
                 
                 // SETUP PART 3
+                message.channel.bulkDelete(2);
                 rrEmbed.setTitle("Reaction Roles - Setup part 3");
                 rrEmbed.setDescription(`Awesome! Now time to choose your emoji!\n\n*DO NOT USE NITRO EMOJIS THAT ARE NOT IN THIS GUILD (I have no way of accessing them)*\n\n**Please react to this message with the emoji you'd like to use**`);
-                message.channel.bulkDelete(1);
+                
                 message.channel.send(rrEmbed)
                 .then(message => {
                   message.awaitReactions((reaction, user) => user.id == operator.id, {
@@ -86,7 +88,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                     // SETUP PART 4
                     rrEmbed.setTitle("Reaction Roles - Setup part 4");
                     rrEmbed.setDescription(`Please tag, write the name or the id of the role you want to give!`);
-                    message.channel.bulkDelete(2);
+                    message.channel.bulkDelete(1);
                     message.channel.send(rrEmbed)
                     .then(() => {
                       message.channel.awaitMessages(filter, {
@@ -213,6 +215,6 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
         });
       
     })
-    
+    //console.timeEnd('ReactionRole Command');
   }
 }

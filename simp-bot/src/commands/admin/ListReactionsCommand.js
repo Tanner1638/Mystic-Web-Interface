@@ -7,10 +7,11 @@ const mongoose = require('mongoose');
 
 module.exports = class ListReactionsCommand extends BaseCommand {
   constructor() {
-    super('listReactions', 'admin', ["lr"]);
+    super('listreactions', 'admin', ["lr"]);
   }
 
   async run(client, message, args) {
+    //console.time('ListReactions Command');
 
     
 
@@ -38,8 +39,6 @@ module.exports = class ListReactionsCommand extends BaseCommand {
       console.error();
     }
     
-
-    
-
+    //console.timeEnd('ListReactions Command');
   }
 }

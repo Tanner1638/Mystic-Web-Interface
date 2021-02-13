@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 
 module.exports = class RemoveReactionRoleCommand extends BaseCommand {
   constructor() {
-    super('removeReactionRole', 'admin', ["rrr"]);
+    super('removerole', 'admin', ["rrr"]);
   }
 
   async run(client, message, args) {

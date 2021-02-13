@@ -9,7 +9,7 @@ const GuildConfig = require('../../database/schemas/GuildConfig');
 
 module.exports = class InitGuildCommand extends BaseCommand {
   constructor() {
-    super('initGuild', 'test', ["ig"]);
+    super('initguild', 'test', ["ig"]);
   }
   async run(client, message, args) {
 

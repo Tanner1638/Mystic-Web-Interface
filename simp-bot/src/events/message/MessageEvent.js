@@ -1,5 +1,6 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
+const Discord = require('discord.js');
 //const React = require('react');
 //const useQuery = require('@apollo/client');
 
@@ -12,6 +13,7 @@ module.exports = class MessageEvent extends BaseEvent {
   async run(client, message) {
     if (message.author.bot) return;
     //console.time('MessageEvent.js');
+    
     
 
     var prefix = "!";
@@ -33,7 +35,7 @@ module.exports = class MessageEvent extends BaseEvent {
     }
 
     if (message.content.startsWith(prefix)) {
-      console.log(`Guild: ${message.guild.name}. ${message.author.username}: ${message.content}`);
+      //console.log(`Guild: ${message.guild.name}. ${message.author.username}: ${message.content}`);
       const [cmdName, ...cmdArgs] = message.content
       .slice(prefix.length)
       .trim()
@@ -54,6 +56,7 @@ module.exports = class MessageEvent extends BaseEvent {
         }
         
         command.run(client, message, cmdArgs);
+        commandLog(client, message);
         message.channel.stopTyping();
       }
     }
@@ -72,4 +75,32 @@ async function getPrefix(message) {
     }
   });
   return prefix;
+}
+
+function commandLog(client, message) {
+  var targetGuild = '807844741793316925'; //Mystic Code
+  var targetChannel = '809780593189322805'; //Chaos Command Logs
+
+  let guild = client.guilds.cache.get(targetGuild),
+    channel;
+
+
+  if (guild) {
+    channel = guild.channels.cache.get(targetChannel);
+    if (channel) {
+      const info = new Discord.MessageEmbed()
+      .setTitle(`Command Used!`)
+      .setColor("bf3f3f")
+      .setTimestamp()
+      .setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png")
+      .setDescription(`**${message.author.username}** has used a command in the **${message.guild.name}** server!\n\n${message.content}\n
+      ---------------------------------------------------------------------
+      `);
+      
+      channel.send(info);
+    }
+    else {
+      console.log("There's no channel with that ID.");
+    }
+  }
 }

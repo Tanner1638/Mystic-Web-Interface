@@ -1,12 +1,14 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const  GuildConfig  = require('../../database/schemas/GuildConfig');
 
+
 module.exports = class QueryCommand extends BaseCommand {
   constructor() {
     super('query', 'developer', []);
   }
 
   async run(client, message, args) {
+    //console.time('QueryCommand.js');
     switch (args[0]) {
       case '1':
         await printGuildConfig(message);
@@ -24,7 +26,7 @@ module.exports = class QueryCommand extends BaseCommand {
     
 
     
-    
+    //console.timeEnd('QueryCommand.js');
   }
 }
 
@@ -111,4 +113,5 @@ function test(message) {
       });
     })
     .catch(console.error);
+    //console.timeEnd('QueryCommand.js');
 }
