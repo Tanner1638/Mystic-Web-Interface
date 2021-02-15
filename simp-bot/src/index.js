@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
-const botOnly = false;
+const botOnly = true;
 const NodeCache = require( "node-cache" );
 
 // Cached Data
