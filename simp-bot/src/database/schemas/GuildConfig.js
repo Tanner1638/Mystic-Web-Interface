@@ -31,6 +31,10 @@ const GuildConfigSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.Array,
         required: false,
     },
+    lockedChannels: {
+        type: mongoose.SchemaTypes.Array,
+        required: false,
+    },
 });
 
 module.exports = mongoose.model('GuildConfig', GuildConfigSchema);
