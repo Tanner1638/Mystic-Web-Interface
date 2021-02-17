@@ -23,8 +23,8 @@ module.exports = class MessageEvent extends BaseEvent {
     var server = guildCache.get(message.guild.id);
     
     if(server == undefined){
-      cacheGuild(message.guild.id);
-      return;
+      await cacheGuild(message.guild.id);
+      server = await guildCache.get(message.guild.id);
     }
     var prefix = server.prefix;
     
