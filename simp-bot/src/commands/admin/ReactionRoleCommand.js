@@ -116,13 +116,41 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                         var reactionRoleId = '';
                         reactionRoleId += targetMessageId.slice(targetMessageId.length-3,targetMessageId.length) + targetChannelID.slice(targetChannelID.length-3,targetChannelID.length) + date;
 
-                        const finalEmbed = new Discord.MessageEmbed()
+                        
+                        
+
+
+                        // END OF PART 4 ^^^
+  
+  
+                        //SETUP PART 5
+                        rrEmbed.setTitle("Reaction Roles - Setup part 5");
+                        rrEmbed.setDescription(`Now you need to choose what type of reaction role you want. Please reply with 1-4.\n You can combine them to add a role and remove a role\n`+
+                        `I am going to explain what those numbers are for you:\n\n 1: This is a normal **Reaction Role**, when you react you get the role and when you remove the reaction it gets removed.\n`+
+                        `2: This creates a reaction that will only give a role and not remove it when they unreact.`);
+                        // \n 3: This is basically just as number 2, only difference is it removes the role instead of giving it.\n`+
+                        // `4: It is type 1 [gives you the role and removes it] but it is inverted: The bot takes the role when you react and gives it back when you unreact.`);
+                        message.channel.bulkDelete(2);
+                        message.channel.send(rrEmbed)
+                        .then(() => {
+                          message.channel.awaitMessages(filter, {
+                              max: 1,
+                              time: time,
+                              errors: ['time']
+                            })
+                          .then(async message => {
+                            message = message.first()
+                            var typeIn = message.content;
+                            // END OF PART 5 ^^^
+
+
+                            const finalEmbed = new Discord.MessageEmbed()
                         .setColor('#bf3f3f')
                         .setTitle('Reaction Roles - Setup Done')
                         .addFields(
                           { name: 'Reaction ID', value: reactionRoleId, inline: true },
                           { name: 'Emoji', value: actualEmoji, inline: true },
-                          { name: 'Type', value: '1', inline: true },
+                          { name: 'Type', value: typeIn, inline: true },
                           { name: 'MessageID', value: targetMessageId, inline: true },
                           { name: 'Channel', value: `<#${targetChannelID}>`, inline: true },
                           { name: 'Role', value: `<@&${role.id}>`, inline: true },
@@ -137,7 +165,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                           messageId: targetMessageId,
                           emojiId: actualEmoji,
                           role: role.id,
-                          type: '1',
+                          type: typeIn,
                         }
                         try {
                           await GuildConfig.findOneAndUpdate({ guildId: message.guild.id }, { $push: { reactionRoles: reactionRoleObject } });
@@ -153,37 +181,15 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                           message.channel.send(`An error has occured! Cannot complete action.`);
                           console.log(err);
                         }
-                        
 
 
-                        // END OF PART 4 ^^^
-  
-  
-                        // SETUP PART 5
-                        // rrEmbed.setTitle("Reaction Roles - Setup part 5");
-                        // rrEmbed.setDescription(`Now you need to choose what type of reaction role you want. Please reply with 1-4.\n You can combine them to add a role and remove a role\n`+
-                        // `I am going to explain what those numbers are for you:\n\n 1: This is a normal **Reaction Role**, when you react you get the role and when you remove the reaction it gets removed.\n`+
-                        // `2: This creates a reaction that will only give a role and not remove it when they unreact.\n 3: This is basically just as number 2, only difference is it removes the role instead of giving it.\n`+
-                        // `4: It is type 1 [gives you the role and removes it] but it is inverted: The bot takes the role when you react and gives it back when you unreact.`);
-                        // message.channel.bulkDelete(2);
-                        // message.channel.send(rrEmbed)
-                        // .then(() => {
-                        //   message.channel.awaitMessages(filter, {
-                        //       max: 1,
-                        //       time: time,
-                        //       errors: ['time']
-                        //     })
-                        //   // .then(async message => {
-                        //   //   message = message.first()
-                        //   //   var type = message.content;
-                        //   //   // END OF PART 5 ^^^
 
                             
-                        //   // })
-                        //   // .catch(collected => {
-                        //   //   message.channel.send('Timeout 5');
-                        //   // });
-                        // })
+                          })
+                          .catch(collected => {
+                            message.channel.send('Timeout 5');
+                          });
+                        })
                       
                       })
                       .catch(collected => {

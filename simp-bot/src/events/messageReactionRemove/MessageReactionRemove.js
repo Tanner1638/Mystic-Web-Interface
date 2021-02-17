@@ -43,9 +43,10 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
 function removeRole(server, emoji, message, user) {
   const reactionRoles = server.reactionRoles;
   for (var i in reactionRoles) {
-    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id) {
+    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id && reactionRoles[i].type == 1) {
       const member = message.guild.member(user.id);
       member.roles.remove(reactionRoles[i].role);
     }
+    
   }
 }

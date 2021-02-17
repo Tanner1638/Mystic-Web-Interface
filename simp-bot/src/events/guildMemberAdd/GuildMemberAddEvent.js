@@ -21,6 +21,8 @@ module.exports = class InviteCreateEvent extends BaseEvent {
         if (err)
             return handleError(err);
         if (guild) {
+          guildCache.set(member.guild.id, guild, 1200);
+          
           var inviteLinks = guild.inviteLinks;
           
           invites.forEach(async invite => {

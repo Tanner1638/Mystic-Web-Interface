@@ -1,3 +1,4 @@
+const { BroadcastDispatcher } = require('discord.js');
 const BaseEvent = require('../../utils/structures/BaseEvent');
 
 module.exports = class ReadyEvent extends BaseEvent {
@@ -8,6 +9,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(client.user.tag + ' has logged in.');
 
     maintenanceMode(client);
+    clientCache.set("debug", false);
 
     
   }

@@ -15,6 +15,10 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
+    if (message.content == "--exit"){
+      clientCache.set("debug", false);
+    }
+    if (clientCache.get("debug")) return;
     
     var server = guildCache.get(message.guild.id);
     

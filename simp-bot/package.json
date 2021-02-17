@@ -1,33 +1,31 @@
 {
-  "name": "simp-bot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon ./src/index.js",
-    "start": "node ./src/index.js",
-    "build": "",
-    "doc": "jsdoc -c jsdoc.json",
-    "dev2233": "nodemon ./src/index.js",
-    "startTest": "node ../../backend/src/app.js",
-    "dash": "(cd ../dashboard-client && npm run start)"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@apollo/client": "^3.3.7",
-    "apollo-client": "^2.6.10",
-    "discord.js": "^12.5.1",
-    "discord.js-collector": "^1.8.7",
-    "dotenv": "^8.2.0",
-    "graphql": "^15.5.0",
-    "mongoose": "^5.11.13",
-    "node-cache": "^5.1.2"
-  },
-  "devDependencies": {
-    "jsdoc": "^3.6.6",
-    "nodemon": "^2.0.7",
-    "npm": "^6.14.11"
+    "name": "simp-bot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "dev": "nodemon ./src/index.js",
+      "start": "node ./src/index.js",
+      "build": "",
+      "doc": "jsdoc -c jsdoc.json",
+      "dev2233": "nodemon ./src/index.js",
+      "startTest": "node ../../backend/src/app.js",
+      "dash": "(cd ../dashboard-client && npm run start)"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@apollo/client": "^3.3.7",
+      "apollo-client": "^2.6.10",
+      "discord.js": "^12.5.1",
+      "dotenv": "^8.2.0",
+      "graphql": "^15.5.0",
+      "mongoose": "^5.11.13"
+    },
+    "devDependencies": {
+      "jsdoc": "^3.6.6",
+      "nodemon": "^2.0.7",
+      "npm": "^6.14.11"
+    }
   }
-}

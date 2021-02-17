@@ -31,7 +31,8 @@ module.exports = class SetPrefixCommand extends BaseCommand {
       .setColor("bf3f3f")
 
     if (!args[0]) {
-      var prefix = prefixCache.get(message.guild.id);
+      var guild = guildCache.get(message.guild.id);
+      var prefix = guild.prefix;
       info.setTitle("How To Set Prefix")
       info.setDescription(`
       Say ${prefix}setPrefix or ${prefix}sp followed by the prefix youd like to set the bot prefix to!\n
@@ -59,7 +60,8 @@ module.exports = class SetPrefixCommand extends BaseCommand {
       ${newPrefix}help, ${newPrefix}kick, ${newPrefix}ban, ${newPrefix}say, etc...
       `);
 
-      prefixCache.set(message.guild.id, newPrefix);
+      //prefixCache.set(message.guild.id, newPrefix);
+      guildCache.del(message.guild.id);
       message.channel.send(info)
       .then(message => {
         message.member.setNickname(`𝕮𝖍𝖆𝖔𝖘 ${newPrefix}`);

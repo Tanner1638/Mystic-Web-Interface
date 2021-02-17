@@ -13,6 +13,9 @@ const NodeCache = require( "node-cache" );
 // Cached Data
 global.guildCache = new NodeCache();
 
+global.clientCache = new NodeCache();
+
+
 
 
 mongoose.connect(process.env.MONGODB_URL, {

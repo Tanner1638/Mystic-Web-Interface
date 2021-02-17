@@ -16,7 +16,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
   async run (client, reaction, user) {
     if(user.bot) return;
     
-
+    guildCache.del(reaction.message.guild.id);
 
     const message = reaction.message;
     const emoji = reaction.emoji.toString();
@@ -48,7 +48,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
 function addRole(server, emoji, message, user) {
   const reactionRoles = server.reactionRoles;
   for (var i in reactionRoles) {
-    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id) {
+    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id && (reactionRoles[i].type == 1 || reactionRoles[i].type == 2)) {
       const member = message.guild.member(user.id);
       member.roles.add(reactionRoles[i].role);
     }
