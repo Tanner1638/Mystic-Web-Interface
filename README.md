@@ -3,10 +3,10 @@
 
 Stable: Chaos v4.4
 
-# Update 4.5.4
+# Update 4.5.5
 
 ### Chaos: Discord Bot
-Version 4.5.4
+Version 4.5.5
 Date: 2/17/2021
 
 ## New Features
@@ -15,6 +15,7 @@ Date: 2/17/2021
 - List reaction roles
 - Remove Reaction Role command
 - Custom embeds now possible. Able to create embeds given key components are stated within the command. Will add new means of creating custom embeds later.
+- Added default role assignment on user join.
 
 
 
@@ -31,6 +32,8 @@ Date: 2/17/2021
 - Added common variable caching for extremely increased efficiency with bot responsiveness.
 - Added ability to disable stable bot from remote hosting through command rather than stopping the server when working on the bot.
 - Added ability to specify what type of action Reaction Role will perform for assigning roles. (1. react/unreact -> give/remove role || 2. react/unreact -> give but not remove)
+- fixed unnecessary processing of invites and api fetched invites on guild member add.
+
 
 
 
