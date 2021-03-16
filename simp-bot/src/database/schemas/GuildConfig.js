@@ -16,7 +16,7 @@ const GuildConfigSchema = new mongoose.Schema({
         required: false,
     },
     defaultRole: {
-        type: mongoose.SchemaTypes.String,
+        type: mongoose.SchemaTypes.Array,
         required: false,
     },
     memberLogChannel: {

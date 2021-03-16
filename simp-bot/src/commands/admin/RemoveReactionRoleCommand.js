@@ -8,6 +8,22 @@ module.exports = class RemoveReactionRoleCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    var Permissions = message.member.permissions;
+    if(!message.author.id == "542483559500218389"){
+      if(!Permissions.has('MANAGE_ROLES')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have permissions to manage roles.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
+    }
     var time = 60000;
     //return message.reply("This command is currently disabled :(");
     const MessageInfo = new Discord.MessageEmbed()

@@ -10,6 +10,22 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
   }
 
   run(client, message, args) {
+    var Permissions = message.member.permissions;
+    if(!message.author.id == "542483559500218389"){
+      if(!Permissions.has('MANAGE_ROLES')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have permissions to manage roles.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
+    }
     //console.time('ReactionRole Command');
     var time = 180000; //180000 - 3 minutes
     var operator = message.author;
@@ -75,13 +91,19 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                   })
                   
                   .then(async emoji => {
-                    emoji = emoji.first();
+                    try{
+                      emoji = emoji.first();
             
-                    var actualEmoji = emoji._emoji.toString();
-            
-                    if(emoji._emoji.id == null){
-                      actualEmoji = emoji._emoji.name;
+                      var actualEmoji = emoji._emoji.toString();
+              
+                      if(emoji._emoji.id == null){
+                        actualEmoji = emoji._emoji.name;
+                      }
                     }
+                    catch{
+                      return message.channel.send("There was an issue using this emoji");
+                    }
+                    
                     // END OF PART 3 ^^^
   
   

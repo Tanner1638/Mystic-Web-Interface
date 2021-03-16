@@ -16,7 +16,6 @@ module.exports = class InviteRoleCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    //console.time('InviteRole Command');
     var Permissions = message.member.permissions;
     if(!Permissions.has('MANAGE_ROLES')) {
       message.channel.bulkDelete(1);

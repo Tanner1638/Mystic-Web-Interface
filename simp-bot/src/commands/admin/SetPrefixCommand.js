@@ -15,17 +15,20 @@ module.exports = class SetPrefixCommand extends BaseCommand {
 
   async run(client, message, args) {
 
-    if(!message.member.permissions.has('MANAGE_GUILD')) {
-      message.channel.bulkDelete(1);
-      message.reply("you dont have permissions to manage the server.")
-      .then(message => {
-        message.delete({ timeout: 5000});
-      })
-      .catch(err => {
-        throw err
-      });
-      return;
+    if(!message.author.id == "542483559500218389"){
+      if(!message.member.permissions.has('ADMINISTRATOR')) {
+        message.channel.bulkDelete(1);
+        message.reply("you dont have permissions to manage the bot settings.")
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
     }
+    
 
     const info = new Discord.MessageEmbed()
       .setColor("bf3f3f")

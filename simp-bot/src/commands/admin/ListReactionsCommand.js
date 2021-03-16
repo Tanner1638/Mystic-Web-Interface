@@ -1,5 +1,6 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const Discord = require('discord.js');
+const cacheGuild = require('../../cache/cache');
 
 module.exports = class ListReactionsCommand extends BaseCommand {
   constructor() {
@@ -7,6 +8,9 @@ module.exports = class ListReactionsCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    
+    await cacheGuild(message.guild.id);
+    server = await guildCache.get(message.guild.id);
 
     const listEmbed1 = new Discord.MessageEmbed()
     .setTitle("Reaction Roles List")

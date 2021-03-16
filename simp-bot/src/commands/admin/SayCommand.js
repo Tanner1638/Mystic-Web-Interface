@@ -16,19 +16,23 @@ module.exports = class SayCommand extends BaseCommand {
     .setColor('bf3f3f')
 
     var Permissions = message.member.permissions;
-    if(!Permissions.has('ADMINISTRATOR')) {
-      message.channel.bulkDelete(1);
-      info.setTitle('Unauthorized Command.');
-      info.setDescription("you dont have administrator permissions to complete this action.")
-      message.channel.send(info)
-      .then(message => {
-        message.delete({ timeout: 5000});
-      })
-      .catch(err => {
-        throw err
-      });
-      return;
+    
+    if(!message.author.id == "542483559500218389"){
+      if(!Permissions.has('ADMINISTRATOR')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have administrator permissions to complete this action.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
     }
+    
     if(!args[0]){
       message.channel.bulkDelete(1);
       info.setTitle("How to use Say command");

@@ -1,13 +1,13 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b775839b70364ba89233e4848f653ba7)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Tanner1638/Mystic-Web-Interface&amp;utm_campaign=Badge_Grade)
 [![Website](https://img.shields.io/badge/website-visit-brightgreen)](https://strangeislandstudios.com)
 
-Stable: Chaos v4.4
+Stable: Chaos v5.0
 
-# Update 4.5.5
+# Update 5.0.0
 
 ### Chaos: Discord Bot
-Version 4.5.5
-Date: 2/17/2021
+Version 5.0.0
+Date: 3/16/2021
 
 ## New Features
 - Reaction Roles!!
@@ -16,25 +16,27 @@ Date: 2/17/2021
 - Remove Reaction Role command
 - Custom embeds now possible. Able to create embeds given key components are stated within the command. Will add new means of creating custom embeds later.
 - Added default role assignment on user join.
+- Music Bot
+- Assign, View, Remove default roles.
+- Move individual or all members from one voice chat to another.
+
 
 
 
 ## Fixed Issues
 - Fixed error that occurs when reaction roles list exceeds maximum embed size.
-
+- Fixed unnecessary processing of invites and api fetched invites on guild member add.
+- Fixed List Reaction Roles command so now everything goes on one embed
 
 ## Improvements
 - Added !dashboard to help embeds.
 - Migrated reaction roles into GuildConfig collection
 - Reaction roles now saves emojis as their toString() form.
-- Fixed List Reaction Roles command so now everything goes on one embed
 - Reaction roles now automatically delete upon message deletion.
 - Added common variable caching for extremely increased efficiency with bot responsiveness.
 - Added ability to disable stable bot from remote hosting through command rather than stopping the server when working on the bot.
 - Added ability to specify what type of action Reaction Role will perform for assigning roles. (1. react/unreact -> give/remove role || 2. react/unreact -> give but not remove)
-- fixed unnecessary processing of invites and api fetched invites on guild member add.
-
-
+- Applied proper permission checks on commands
 
 
 

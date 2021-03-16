@@ -13,8 +13,45 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    message.channel.bulkDelete(1);
-
+    var Permissions = message.member.permissions;
+    if(!message.author.id == "542483559500218389"){
+      if(!Permissions.has('EMBED_LINKS')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have permissions to send embed links.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
+    }
+    if(!args[0]){
+      const info = new Discord.MessageEmbed()
+      .setColor('bf3f3f')
+      .setTitle('Info - Create Embed')
+      .setDescription(`
+      Create a custom embed on the fly!\n
+      There are a few attributes you can mention in your message to customize your embed. These attributes are: color, title, description, footer, image, thumbnail, and url. (There will be more added in the future)\n
+      **How to use:**\n
+      **-createEmbed**
+      **title:** Your Wonderful Embed Title
+      **desc:** lets include some text for the description of your embed owo this is how!
+      **footer:** Amazing footer text will be put here if you want it!
+      **image:** https:/YourImageLinkHere
+      **thumbnai:** https:YourThumbnailImageLinkHere
+      **url:** http:/linkAddress\n
+      `)
+      .setFooter("Note: You dont need to include all of these fields listed in the example! If you just want an embed with a title and description, only include title: and desc: (interchangeable with other attributes too!)");
+      return message.channel.send(info);
+    }
+    if(args[0] != "debug"){
+      message.channel.bulkDelete(1);
+    }
+    
     var color = 'bf3f3f';
     var title;
     var description;
@@ -22,6 +59,7 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
     var image;
     var thumbnail;
     var url;
+    var deleteOnSend = true;
     
 
     var msg = message.content.toLowerCase();
@@ -44,9 +82,6 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       'thumbnail':thumbnailIndex,
       'url':URLIndex
     }
-
-    
-    //console.log(indexCollection);
 
     
     
@@ -96,6 +131,17 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       }
 
     }
+
+    if(filter['desc']){
+      var descArgs = filter['desc'].split(/\\n+/);
+      var newDesc = "";
+      descArgs.forEach(arg => {
+        
+        newDesc += arg.trim() + `\n`;
+      })
+      filter['desc'] = newDesc;
+      //message.channel.send(newDesc);
+    }
     
 
     const customEmbed = new Discord.MessageEmbed();
@@ -137,40 +183,14 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
 
     message.channel.send(customEmbed);
 
-
-
-    //console.log(`Color Index: ${colorIndex}\nTitle Index: ${titleIndex}\nDescrip Index: ${descriptionIndex}`);
-
-    //filter['title'] = message.content.slice(titleIndex+6, descriptionIndex).trim();
-    //console.log(`TITLE: ${message.content.slice(titleIndex+6, descriptionIndex).trim()}`);
-
-    //filter['description'] = message.content.slice(titleIndex+6, descriptionIndex).trim();
-    //console.log(`description: ${message.content.slice(titleIndex+6, descriptionIndex).trim()}`);
-
-
+    /**
+     * This function will allow you to edit the embed that was previously sent. This would be useful for any confirmation messages or what not.
+     */
     
+    // .then(message => {
+    //   message.edit(customEmbed.setDescription("HA bet this doesnt work"));
+    // })
 
-
-
-    // if(filter['color'] != undefined){
-    //   console.log(`Color: ${filter['color']}`);
-    // }
-    // if(filter['title'] != undefined){
-    //   console.log(`title: ${filter['title']}`);
-    // }
-    // if(filter['desc'] != undefined){
-    //   console.log(`desc: ${filter['desc']}`);
-    // }
-    
-    
-
-    
-
-    
-
-    
-
-    //embedProcess(message);
   }
 }
 

@@ -14,8 +14,7 @@ const NodeCache = require( "node-cache" );
 global.guildCache = new NodeCache();
 
 global.clientCache = new NodeCache();
-
-
+global.MusicQueue = new Map();
 
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -29,7 +28,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("We connected to the database!!!");
 });
-
 
 
 (async () => {

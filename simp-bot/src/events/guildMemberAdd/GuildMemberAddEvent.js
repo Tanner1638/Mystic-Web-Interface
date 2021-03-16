@@ -13,7 +13,6 @@ module.exports = class InviteCreateEvent extends BaseEvent {
     super('guildMemberAdd');
   }
   async run (client, member) {
-    
     var apiInvites = {};
     var guildInvites = {};
     member.guild.fetchInvites()
@@ -26,7 +25,13 @@ module.exports = class InviteCreateEvent extends BaseEvent {
             return handleError(err);
         if (guild) {
           guildCache.set(member.guild.id, guild, 1200);
-          member.roles.add(guild.defaultRole).catch(console.error);
+          
+          if(guild.defaultRole) {
+            guild.defaultRole.forEach(role => {
+              member.roles.add(role).catch(console.error);
+            })
+          }
+          
           var inviteLinks = guild.inviteLinks;
 
           guild.inviteLinks.forEach(invite =>{
@@ -39,18 +44,23 @@ module.exports = class InviteCreateEvent extends BaseEvent {
 
           });
 
+          try {
           for  (var apiInvite in apiInvites){
-            if (guildInvites[apiInvite].uses != apiInvites[apiInvite]){
+              if (guildInvites[apiInvite].uses != apiInvites[apiInvite]){
 
-              await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': apiInvite},
-                    { $set: {'inviteLinks.$.uses': apiInvites[apiInvite]}
-                  });
-              if(guildInvites[apiInvite].role){
-                member.roles.add(guildInvites[apiInvite].role).catch(console.error);
+                await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': apiInvite},
+                      { $set: {'inviteLinks.$.uses': apiInvites[apiInvite]}
+                    });
+                if(guildInvites[apiInvite].role){
+                  member.roles.add(guildInvites[apiInvite].role).catch(console.error);
+                }
+                return;
               }
-              return;
+              
             }
-            
+          }
+          catch {
+            console.error();
           }
         }
       });

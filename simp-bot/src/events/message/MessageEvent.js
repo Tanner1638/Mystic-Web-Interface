@@ -14,19 +14,46 @@ module.exports = class MessageEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    if (message.author.bot) return;
+    if (message.author.bot) return; //return if message came from bot
+
     if (message.content == "--exit"){
       clientCache.set("debug", false);
+      message.channel.send("Returning to normal opperations");
     }
+
     if (clientCache.get("debug")) return;
+
+
+    if (message.channel.type == 'dm'){
+      let user = client.users.cache.find(user => user.id == '542483559500218389')
+      const dmEmbed = new Discord.MessageEmbed()
+      .setColor('bf3f3f')
+      .setAuthor(message.author.username)
+      .setThumbnail(`https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}`)
+      .setDescription(message.content);
+      
+      user.send(dmEmbed);
+      return;
     
+    }
+
     var server = guildCache.get(message.guild.id);
     
     if(server == undefined){
       await cacheGuild(message.guild.id);
       server = await guildCache.get(message.guild.id);
     }
-    var prefix = server.prefix;
+    
+    var prefix;
+    try {
+      prefix = server.prefix;
+    }
+    catch{
+      console.log("Server not preloaded...")
+      prefix = "-";
+    }
+
+    
     
 
     if (message.content.startsWith(prefix)) {
@@ -80,6 +107,38 @@ function commandLog(client, message) {
       `);
       
       channel.send(info);
+    }
+    else {
+      console.log("There's no channel with that ID.");
+    }
+  }
+
+
+}
+
+
+
+//Chaos Bot Personality functions
+    // if (message.guild.id == '807844741793316925'){
+    //   if(message.channel.id == '808169622994026497'){
+    //     globalSay(client, message.content);
+    //   }
+    // }
+
+function globalSay(client, message) {
+   var targetGuild = '723441004002148374'; //Mystics OG Squad server
+   var targetChannel = '757572261481021641'; //General chat
+
+  let guild = client.guilds.cache.get(targetGuild),
+    channel;
+
+
+  if (guild) {
+    channel = guild.channels.cache.get(targetChannel);
+    if (channel) {
+
+      let newMessage = message;
+      channel.send(newMessage, {tts: true});
     }
     else {
       console.log("There's no channel with that ID.");

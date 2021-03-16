@@ -2,7 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class DebugCommand extends BaseCommand {
   constructor() {
-    super('debug', 'developer', []);
+    super('devmode', 'developer', []);
   }
 
   run(client, message, args) {
