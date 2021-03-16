@@ -11,7 +11,7 @@ module.exports = class BanCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("You do not have ban member permissions!");
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply("You do not have ban member permissions!");
     
     if(!args[0]) return message.reply("You must @mention a user to ban.")
     let User = message.guild.member(message.mentions.users.first());

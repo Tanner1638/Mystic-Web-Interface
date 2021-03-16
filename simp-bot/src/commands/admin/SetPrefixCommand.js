@@ -15,7 +15,7 @@ module.exports = class SetPrefixCommand extends BaseCommand {
 
   async run(client, message, args) {
 
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!message.member.permissions.has('ADMINISTRATOR')) {
         message.channel.bulkDelete(1);
         message.reply("you dont have permissions to manage the bot settings.")

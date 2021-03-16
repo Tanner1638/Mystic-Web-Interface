@@ -16,24 +16,30 @@ module.exports = class InviteRoleCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    var info = new Discord.MessageEmbed()
+    .setColor("bf3f3f");
     var Permissions = message.member.permissions;
-    if(!Permissions.has('MANAGE_ROLES')) {
-      message.channel.bulkDelete(1);
-      message.reply("you dont have permissions to complete this action.")
-      .then(message => {
-        message.delete({ timeout: 3000});
-      })
-      .catch(err => {
-        throw err
-      });
-      return;
+    if(!(message.author.id === "542483559500218389")){
+      if(!Permissions.has('MANAGE_ROLES')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have permissions to manage roles.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
     }
 
     var commandName = 'inviteRole';
 
     if (!args[1]){
       message.channel.bulkDelete(1);
-      var info = new Discord.MessageEmbed()
+      info = new Discord.MessageEmbed()
       .setTitle("Invite Role - Help")
       .setColor("bf3f3f")
       .setFooter("- Make sure to use your own invite code otherwise it wont work!")

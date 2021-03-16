@@ -8,8 +8,11 @@ module.exports = class RemovedefaultroleCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    const info = new Discord.MessageEmbed()
+    .setColor("bf3f3f");
+    
     var Permissions = message.member.permissions;
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!Permissions.has('MANAGE_ROLES')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');

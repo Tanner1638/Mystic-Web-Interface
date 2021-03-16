@@ -13,8 +13,11 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
   }
 
   run(client, message, args) {
+
+    const info = new Discord.MessageEmbed()
+    .setColor('bf3f3f')
     var Permissions = message.member.permissions;
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!Permissions.has('EMBED_LINKS')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');
@@ -30,10 +33,8 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       }
     }
     if(!args[0]){
-      const info = new Discord.MessageEmbed()
-      .setColor('bf3f3f')
-      .setTitle('Info - Create Embed')
-      .setDescription(`
+      info.setTitle('Info - Create Embed');
+      info.setDescription(`
       Create a custom embed on the fly!\n
       There are a few attributes you can mention in your message to customize your embed. These attributes are: color, title, description, footer, image, thumbnail, and url. (There will be more added in the future)\n
       **How to use:**\n
@@ -44,8 +45,8 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       **image:** https:/YourImageLinkHere
       **thumbnai:** https:YourThumbnailImageLinkHere
       **url:** http:/linkAddress\n
-      `)
-      .setFooter("Note: You dont need to include all of these fields listed in the example! If you just want an embed with a title and description, only include title: and desc: (interchangeable with other attributes too!)");
+      `);
+      info.setFooter("Note: You dont need to include all of these fields listed in the example! If you just want an embed with a title and description, only include title: and desc: (interchangeable with other attributes too!)");
       return message.channel.send(info);
     }
     if(args[0] != "debug"){
@@ -110,7 +111,7 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
     }
 
     orderedCollection.forEach(attribute => {
-      if (attribute[1] == -1) {
+      if (attribute[1] === -1) {
         orderedCollection = orderedCollection.slice(1);
       }
     })
@@ -122,7 +123,7 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       var nameIndex = orderedCollection[i][1];
       
       if(i < orderedCollection.length-1) {
-        var nextNameIndex = orderedCollection[i+1][1]
+        var nextNameIndex = orderedCollection[i+1][1];
         filter[name] = message.content.slice(nameIndex + name.length+1, nextNameIndex).trim();
       }
       
@@ -207,7 +208,7 @@ function embedProcess(message) {
     .setImage("url")
     .setThumbnail("url")
     .setTimestamp()
-    .setURL("url")
+    .setURL("url");
     //.setAuthor("name","iconIMAGEurl", "iconLink")
     
 

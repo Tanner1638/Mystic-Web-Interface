@@ -8,7 +8,7 @@ module.exports = class MovemembersCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!message.member.permissions.has('MOVE_MEMBERS')) {
         message.channel.bulkDelete(1);
         message.reply("you dont have permissions to move members.")
@@ -16,7 +16,7 @@ module.exports = class MovemembersCommand extends BaseCommand {
           message.delete({ timeout: 5000});
         })
         .catch(err => {
-          throw err
+          throw err;
         });
         return;
       }
@@ -30,7 +30,7 @@ module.exports = class MovemembersCommand extends BaseCommand {
       const info = new Discord.MessageEmbed()
       .setColor("bf3f3f")
       .setTitle("Info - Move All Members")
-      .setDescription(`This command will move all individuals in the voice chat into a different voice channel.\n**How to use:**\n ${prefix}moveAll [VC Channel ID] \n\nExample: ${prefix}moveAll 725896241736843294`)
+      .setDescription(`This command will move all individuals in the voice chat into a different voice channel.\n**How to use:**\n ${prefix}moveAll [VC Channel ID] \n\nExample: ${prefix}moveAll 725896241736843294`);
       return message.channel.send(info);
     }
     var voiceChannel = message.guild.channels.cache.get(args[0]);

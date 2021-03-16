@@ -9,8 +9,11 @@ module.exports = class AdddefaultroleCommand extends BaseCommand {
 
   async run(client, message, args) {
 
+    const info = new Discord.MessageEmbed()
+    .setColor("bf3f3f");
+
     var Permissions = message.member.permissions;
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!Permissions.has('MANAGE_ROLES')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');
@@ -33,12 +36,13 @@ module.exports = class AdddefaultroleCommand extends BaseCommand {
     }
 
     var targetRoleId = args[0];
+    var role = "";
     if (targetRoleId.startsWith('<@')) {
       targetRoleId = targetRoleId.slice(3, targetRoleId.length - 1);
-      var role = message.guild.roles.cache.get(targetRoleId);
+      role = message.guild.roles.cache.get(targetRoleId);
     }
     else {
-      var role = message.guild.roles.cache.find(role => role.name.toLowerCase() == targetRoleId.toLowerCase());
+      role = message.guild.roles.cache.find(role => role.name.toLowerCase() == targetRoleId.toLowerCase());
       if (!role) return message.reply("I couldn't find that role! Did you spell it right?");
       targetRoleId = role.id;
     }
@@ -70,17 +74,17 @@ module.exports = class AdddefaultroleCommand extends BaseCommand {
           .then(message => {
             message.delete({ timeout: 10000 });
           })
-          .catch(err => {
+          .catch((err) => {
             throw err
           });
         } catch (err) {
           message.channel.send(`An error has occured! Cannot complete action.`);
           console.log(err);
-        }
-      }
+        };
+      };
     });
-  }
-}
+  };
+};
 
 
 function InfoMessage(message) {
@@ -88,7 +92,7 @@ function InfoMessage(message) {
 
   const prefix = guildCache.get(message.guild.id).prefix;
 
-  var info = new Discord.MessageEmbed()
+  const info = new Discord.MessageEmbed()
     .setTitle("Add Default Roles - Help")
     .setColor("bf3f3f")
     .setFooter(`Note: You can use "${prefix}addDefaultRole" or the shortcut "${prefix}adr" for this command.`)

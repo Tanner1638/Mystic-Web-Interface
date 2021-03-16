@@ -14,7 +14,7 @@ module.exports = class PurgeCommand extends BaseCommand {
     //console.time('Purge Command');
     let time = 2000; //2 Seconds
 
-    if(!message.author.id == "542483559500218389"){
+    if(!(message.author.id === "542483559500218389")){
       if(!message.member.permissions.has('MANAGE_MESSAGES')) {
         message.channel.bulkDelete(1);
         message.reply("You dont have permissions to manage messages.")
