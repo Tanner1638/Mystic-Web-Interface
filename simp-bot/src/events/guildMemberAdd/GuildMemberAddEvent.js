@@ -29,12 +29,12 @@ module.exports = class InviteCreateEvent extends BaseEvent {
           if(guild.defaultRole) {
             guild.defaultRole.forEach(role => {
               member.roles.add(role).catch(console.error);
-            })
+            });
           }
           
           var inviteLinks = guild.inviteLinks;
 
-          guild.inviteLinks.forEach(invite =>{
+          guild.inviteLinks.forEach(invite => {
             var guildInviteObject = {uses: invite.uses, role: invite.roles}
             guildInvites[invite.code] = guildInviteObject;
           })
@@ -46,7 +46,7 @@ module.exports = class InviteCreateEvent extends BaseEvent {
 
           try {
           for  (var apiInvite in apiInvites){
-              if (guildInvites[apiInvite].uses != apiInvites[apiInvite]){
+              if (guildInvites[apiInvite].uses !== apiInvites[apiInvite]){
 
                 await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': apiInvite},
                       { $set: {'inviteLinks.$.uses': apiInvites[apiInvite]}
