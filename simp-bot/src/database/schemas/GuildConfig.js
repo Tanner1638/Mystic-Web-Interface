@@ -16,7 +16,7 @@ const GuildConfigSchema = new mongoose.Schema({
         required: false,
     },
     defaultRole: {
-        type: mongoose.SchemaTypes.String,
+        type: mongoose.SchemaTypes.Array,
         required: false,
     },
     memberLogChannel: {
@@ -24,6 +24,10 @@ const GuildConfigSchema = new mongoose.Schema({
         required: false,
     },
     inviteLinks: {
+        type: mongoose.SchemaTypes.Array,
+        required: false,
+    },
+    reactionRoles: {
         type: mongoose.SchemaTypes.Array,
         required: false,
     },

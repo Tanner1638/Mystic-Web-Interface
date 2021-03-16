@@ -11,22 +11,26 @@ module.exports = class PurgeCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    let time = 5000; //5 Seconds
+    //console.time('Purge Command');
+    let time = 2000; //2 Seconds
 
-    if(!message.member.permissions.has('MANAGE_MESSAGES')) {
-      message.channel.bulkDelete(1);
-      message.reply("You dont have permissions to manage messages.")
-      .then(message => {
-        message.delete({ timeout: time});
-      })
-      .catch(err => {
-        throw err
-      });
-      return;
+    if(!(message.author.id === "542483559500218389")){
+      if(!message.member.permissions.has('MANAGE_MESSAGES')) {
+        message.channel.bulkDelete(1);
+        message.reply("You dont have permissions to manage messages.")
+        .then(message => {
+          message.delete({ timeout: time});
+        })
+        .catch(err => {
+          throw err
+        });
+        return;
+      }
     }
     
+    
     if(!args[0] || parseInt(args[0],10) <= 0){
-      return message.reply('How many messages do you want to delete? (1 - 99)');
+      return message.reply('You must specify how many messages to delete (1 - 99)');
     }
     let amount = parseInt(args[0],10)+1;
     
@@ -52,6 +56,6 @@ module.exports = class PurgeCommand extends BaseCommand {
       });
 
     }
-    
+    //console.timeEnd('Purge Command');
   }
 }

@@ -7,7 +7,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class SetBotAvatarCommand extends BaseCommand {
   constructor() {
-    super('setBotAvatar', 'developer', []);
+    super('setBotAvatar', 'developer', ["sbb"]);
   }
 
   run(client, message, args) {
@@ -16,3 +16,5 @@ module.exports = class SetBotAvatarCommand extends BaseCommand {
     .catch(console.error);
   }
 }
+
+//

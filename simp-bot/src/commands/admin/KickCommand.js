@@ -12,13 +12,17 @@ module.exports = class KickCommand extends BaseCommand {
 
   run(client, message, args) {
     if(message.member.hasPermission("KICK_MEMBERS")) {
-      let User = message.guild.member(message.mentions.users.first())
+      if(!args[0]){
+        return message.reply("You must @mention a user to kick.");
+      }
+      
+      let User = message.guild.member(message.mentions.users.first());
       
       if(!User) return message.channel.send("Invalid user");
       User.kick();
     }
     else {
-      message.reply("You do not have kick members permission.")
+      message.reply("You do not have kick members permission.");
     }
   }
-}
+};

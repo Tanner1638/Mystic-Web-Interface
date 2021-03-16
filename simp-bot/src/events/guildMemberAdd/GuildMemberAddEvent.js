@@ -13,33 +13,64 @@ module.exports = class InviteCreateEvent extends BaseEvent {
     super('guildMemberAdd');
   }
   async run (client, member) {
+    var apiInvites = {};
+    var guildInvites = {};
     member.guild.fetchInvites()
     .then(async invites => {
+      
       const guildObject = member.guild;
       const query = GuildConfig.where({ guildId: guildObject.id });
-      await query.findOne(function (err, guild) {
+      await query.findOne(async function (err, guild) {
         if (err)
             return handleError(err);
         if (guild) {
-          var inviteLinks = guild.inviteLinks;
+          guildCache.set(member.guild.id, guild, 1200);
           
+          if(guild.defaultRole) {
+            guild.defaultRole.forEach(role => {
+              member.roles.add(role).catch(console.error);
+            })
+          }
+          
+          var inviteLinks = guild.inviteLinks;
+
+          guild.inviteLinks.forEach(invite =>{
+            var guildInviteObject = {uses: invite.uses, role: invite.roles}
+            guildInvites[invite.code] = guildInviteObject;
+          })
+
           invites.forEach(async invite => {
-            for(var i in inviteLinks){
-              if(inviteLinks[i].code == invite.code){
-                if(inviteLinks[i].uses != invite.uses){
-                  await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': invite.code},
-                    { $set: {'inviteLinks.$.uses': invite.uses}
-                  });
-                  if(inviteLinks[i].roles){
-                    member.roles.add(inviteLinks[i].roles).catch(console.error);
-                  }
-                  return;
-                }
-              }
-            }
+            apiInvites[invite.code] = invite.uses;
+
           });
+
+          try {
+          for  (var apiInvite in apiInvites){
+              if (guildInvites[apiInvite].uses != apiInvites[apiInvite]){
+
+                await GuildConfig.updateOne({ guildId: guildObject.id, 'inviteLinks.code': apiInvite},
+                      { $set: {'inviteLinks.$.uses': apiInvites[apiInvite]}
+                    });
+                if(guildInvites[apiInvite].role){
+                  member.roles.add(guildInvites[apiInvite].role).catch(console.error);
+                }
+                return;
+              }
+              
+            }
+          }
+          catch {
+            console.error();
+          }
         }
       });
+    })
+    .finally( async () => {
+      for( var code in guildInvites){
+        if(!apiInvites.hasOwnProperty(code)){
+          const query = await GuildConfig.findOneAndUpdate({ guildId: member.guild.id}, { $pull: {inviteLinks: {code: code}}});
+        }
+      }
     })
     .catch(console.error);
   }

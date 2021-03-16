@@ -1,36 +1,56 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const GuildConfig = require('../../database/schemas/GuildConfig');
+const Discord = require('discord.js');
 
 /**
  * this command will allow a server admin to specify a role to give based off an existing invite link.
  * @version 4.3.7
  * 
  * needs to retrieve: role, inviteURL or code
+ * @TODO #77
  */
 
-module.exports = class AssignRoleByInviteCommand extends BaseCommand {
+module.exports = class InviteRoleCommand extends BaseCommand {
   constructor() {
-    super('assignInviteRole', 'admin', ["assigninviterole"]);
+    super('inviterole', 'admin', ["ir"]);
   }
 
   async run(client, message, args) {
-
+    var info = new Discord.MessageEmbed()
+    .setColor("bf3f3f");
     var Permissions = message.member.permissions;
-    if(!Permissions.has('MANAGE_ROLES')) {
-      message.channel.bulkDelete(1);
-      message.reply("you dont have permissions to complete this action.")
-      .then(message => {
-        message.delete({ timeout: 5000});
-      })
-      .catch(err => {
-        throw err
-      });
-      return;
+    if(!(message.author.id === "542483559500218389")){
+      if(!Permissions.has('MANAGE_ROLES')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have permissions to manage roles.")
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err;
+        });
+        return;
+      }
     }
 
-    var commandName = 'assignInviteRole';
+    var commandName = 'inviteRole';
 
-    if (!args[1]) return message.reply(`You must provide a role and a invite URL or code to perform this action.\n\n**Examples**:\n!${commandName} @member <http://discord.gg//INVITECODE>\n!${commandName} member INVITECODE`);
+    if (!args[1]){
+      message.channel.bulkDelete(1);
+      info = new Discord.MessageEmbed()
+      .setTitle("Invite Role - Help")
+      .setColor("bf3f3f")
+      .setFooter("- Make sure to use your own invite code otherwise it wont work!")
+      .setDescription(
+        `Link a role to give when a user joins off a specific invite link!\n
+        To do this, type the command followed by either @tagging or writing the name of the role you want to give. Then insert either the invite URL or the invite code.\n
+        !inviteRole [ROLE] [INVITE]`
+      )
+      .addField(`Examples:`,  `!inviteRole @RoleToGive <https://discord.gg/M7jjUACQ>\n!inviteRole @RoleToGive M7jjUACQ\n!inviteRole RoleToGive M7jjUACQ\n!inviteRole RoleToGive <https://discord.gg/M7jjUACQ>`);
+      return message.channel.send(info);
+    }
 
     var initialRole = args[0];
     var inviteCode = args[1];
@@ -78,5 +98,6 @@ module.exports = class AssignRoleByInviteCommand extends BaseCommand {
       })
       message.channel.send(`Role: ${roleObject.name} is now linked to invite code: ${inviteCode}`);
     }
+    //console.timeEnd('InviteRole Command');
   }
 }

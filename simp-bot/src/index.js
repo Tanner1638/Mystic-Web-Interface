@@ -2,14 +2,23 @@ require('dotenv').config({ path: __dirname + `/../../.env`});
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 //const config = require('../slappey.json');
-const client = new Client();
+const client = new Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION']});
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 const GuildConfig = require('../../backend/src/database/schemas/GuildConfig');
 const a = require('npm');
-const botOnly = false;
+const botOnly = true;
+const NodeCache = require( "node-cache" );
+
+// Cached Data
+global.guildCache = new NodeCache();
+
+global.clientCache = new NodeCache();
+global.MusicQueue = new Map();
 
 
 mongoose.connect(process.env.MONGODB_URL, {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -22,6 +31,7 @@ db.once('open', function() {
 
 
 (async () => {
+  console.time('Initializing Bot');
   client.commands = new Map();
   client.events = new Map();
   client.prefixes = new Map();
@@ -32,6 +42,5 @@ db.once('open', function() {
   if(!botOnly) {
     a.load(() => a.run("dash"));
   }
+  console.timeEnd('Initializing Bot');
 })();
-
-

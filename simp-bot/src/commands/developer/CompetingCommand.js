@@ -2,7 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class CompetingCommand extends BaseCommand {
   constructor() {
-    super('competingIn', 'developer', ["competingin"]);
+    super('competingin', 'developer', []);
   }
 
   run(client, message, args) {

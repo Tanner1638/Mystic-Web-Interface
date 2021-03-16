@@ -1,4 +1,5 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
+const Discord = require('discord.js');
 
 /**
  * Allows server admin to have the bot send a message in a specified channel
@@ -11,16 +12,41 @@ module.exports = class SayCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    const info = new Discord.MessageEmbed()
+    .setColor('bf3f3f');
 
     var Permissions = message.member.permissions;
-    if(!Permissions.has('ADMINISTRATOR')) {
+    
+    if(!(message.author.id === "542483559500218389")){
+      if(!Permissions.has('ADMINISTRATOR')) {
+        message.channel.bulkDelete(1);
+        info.setTitle('Unauthorized Command.');
+        info.setDescription("you dont have administrator permissions to complete this action.");
+        message.channel.send(info)
+        .then(message => {
+          message.delete({ timeout: 5000});
+        })
+        .catch(err => {
+          throw err;
+        });
+        return;
+      }
+    }
+    
+    if(!args[0]){
       message.channel.bulkDelete(1);
-      message.reply("you dont have permissions to complete this action.")
-      .then(message => {
-        message.delete({ timeout: 5000});
+      info.setTitle("How to use Say command");
+      info.setDescription(`
+      The Say command is used to make the bot say something!\n
+      You can specifiy a channel to send the message in by #tagging the channel before your message!\n\n
+      **Example:** !say #general Hi how are you? I am Chaos Bot.
+      `);
+      message.channel.send(info)
+      .finally(message => {
+        message.delete({ timeout: 30000});
       })
       .catch(err => {
-        throw err
+        return;
       });
       return;
     }
