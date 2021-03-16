@@ -20,4 +20,4 @@ module.exports = class MembercountCommand extends BaseCommand {
 
     console.log(`Server Count: ${serverCount}\nMember Count: ${memberCount}`);
   }
-}
+};

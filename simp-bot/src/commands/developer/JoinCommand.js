@@ -7,7 +7,7 @@ module.exports = class JoinCommand extends BaseCommand {
 
   run(client, message, args) {
     
-    const voice_channel = message.member.voice.channel;
-    voice_channel.join()
+    const voiceChannel = message.member.voice.channel;
+    voiceChannel.join()
   }
-}
+};

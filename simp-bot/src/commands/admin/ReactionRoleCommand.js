@@ -47,7 +47,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
           errors: ['time']
         })
         .then(message => {
-          message = message.first()
+          message = message.first();
           
           var targetChannelID = message.content.slice(2,(message.content.length-1));
           var channel = client.channels.cache.get(targetChannelID);
@@ -69,7 +69,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                 errors: ['time']
               })
             .then(message => {
-              message = message.first()
+              message = message.first();
               var targetMessageId = message.content
               channel.messages.fetch(targetMessageId)
               .then(() => {
@@ -121,7 +121,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                           errors: ['time']
                         })
                       .then(async message => {
-                        message = message.first()
+                        message = message.first();
                         var targetRoleId = message.content;
                         if (targetRoleId.startsWith('<@')) {
                           targetRoleId = targetRoleId.slice(3, targetRoleId.length - 1);
@@ -163,7 +163,7 @@ module.exports = class ReactionRoleCommand extends BaseCommand {
                               errors: ['time']
                             })
                           .then(async message => {
-                            message = message.first()
+                            message = message.first();
                             var typeIn = message.content;
                             // END OF PART 5 ^^^
 

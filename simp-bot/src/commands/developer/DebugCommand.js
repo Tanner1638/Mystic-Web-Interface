@@ -10,4 +10,4 @@ module.exports = class DebugCommand extends BaseCommand {
     clientCache.set("debug", true);
 
   }
-}
+};

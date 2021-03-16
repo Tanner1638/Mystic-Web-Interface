@@ -29,7 +29,7 @@ module.exports = class SsayCommand extends BaseCommand {
       var sMessage = ""
       args.forEach(arg => {
         sMessage += `||${arg}|| `;
-      })
+      });
 
       //client.channels.cache.get(channel).send(sMessage);
 
@@ -37,4 +37,4 @@ module.exports = class SsayCommand extends BaseCommand {
     }
 
   }
-}
+};

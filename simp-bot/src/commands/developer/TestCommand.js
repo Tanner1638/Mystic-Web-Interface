@@ -12,24 +12,9 @@ module.exports = class TestCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    message.channel.send("Test command works! Wonderful!")
-
-    // var count = 1;
-    // console.log(`Count Before func: ${count}`);
-    // count = add(count);
-    // console.log(`Count after: ${count}`);
-    // count = add(count);
-    // console.log(`Count after: ${count}`);
-
-    //console.log(`Cached Prefix: ${prefixCache.get(message.guild.id)}`);
-    
-    
-
-
-
+    message.channel.send("Test command works! Wonderful!");
 
     //shutDownFunction(message, operator, msg);
-
   }
 }
 
@@ -48,8 +33,10 @@ function shutDownFunction(message, operator, msg) {
                 msg.reply('Shutting down...');
               }
 
-              else
+              else {
                 msg.reply('Operation canceled.');
+              }
+                
             })
             .catch(() => {
               msg.reply('No reaction after 30 seconds, operation canceled');

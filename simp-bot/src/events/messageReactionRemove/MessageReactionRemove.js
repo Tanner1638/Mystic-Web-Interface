@@ -11,7 +11,9 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
     super('messageReactionRemove');
   }
   async run (client, reaction, user) {
-    if(user.bot) return;
+    if(user.bot) {
+      return;
+    }
 
 
     const message = reaction.message;
@@ -37,13 +39,13 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
 
     removeRole(server, emoji, message, user);
   }
-}
+};
 
 
 function removeRole(server, emoji, message, user) {
   const reactionRoles = server.reactionRoles;
   for (var i in reactionRoles) {
-    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id && reactionRoles[i].type == 1) {
+    if (reactionRoles[i].emojiId === emoji && reactionRoles[i].messageId === message.id && reactionRoles[i].type === 1) {
       const member = message.guild.member(user.id);
       member.roles.remove(reactionRoles[i].role);
     }

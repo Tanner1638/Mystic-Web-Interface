@@ -14,9 +14,11 @@ module.exports = class MessageEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    if (message.author.bot) return; //return if message came from bot
+    if (message.author.bot) {
+      return; //return if message came from bot
+    }
 
-    if (message.content == "--exit"){
+    if (message.content === "--exit"){
       clientCache.set("debug", false);
       message.channel.send("Returning to normal opperations");
     }
@@ -24,8 +26,8 @@ module.exports = class MessageEvent extends BaseEvent {
     if (clientCache.get("debug")) return;
 
 
-    if (message.channel.type == 'dm'){
-      let user = client.users.cache.find(user => user.id == '542483559500218389')
+    if (message.channel.type === 'dm'){
+      let user = client.users.cache.find(user => user.id === '542483559500218389')
       const dmEmbed = new Discord.MessageEmbed()
       .setColor('bf3f3f')
       .setAuthor(message.author.username)
@@ -39,7 +41,7 @@ module.exports = class MessageEvent extends BaseEvent {
 
     var server = guildCache.get(message.guild.id);
     
-    if(server == undefined){
+    if(server === undefined){
       await cacheGuild(message.guild.id);
       server = await guildCache.get(message.guild.id);
     }
@@ -49,7 +51,7 @@ module.exports = class MessageEvent extends BaseEvent {
       prefix = server.prefix;
     }
     catch{
-      console.log("Server not preloaded...")
+      console.log("Server not preloaded...");
       prefix = "-";
     }
 

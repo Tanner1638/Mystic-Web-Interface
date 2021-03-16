@@ -9,10 +9,10 @@ module.exports = class SkipCommand extends BaseCommand {
     if(!message.member.voice.channel) return message.channel.send("You need to be in a voice channel to execute this command");
     const queue = MusicQueue;
 
-    const server_queue = queue.get(message.guild.id);
-    if(!server_queue){
+    const serverQueue = queue.get(message.guild.id);
+    if(!serverQueue){
       return message.channel.send("There are no songs in queue");
     }
-    server_queue.connection.dispatcher.end();
+    serverQueue.connection.dispatcher.end();
   }
-}
+};

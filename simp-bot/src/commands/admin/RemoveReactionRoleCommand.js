@@ -26,7 +26,7 @@ module.exports = class RemoveReactionRoleCommand extends BaseCommand {
         });
         return;
       }
-    }
+    };
     var time = 60000;
     //return message.reply("This command is currently disabled :(");
     const MessageInfo = new Discord.MessageEmbed()
@@ -72,7 +72,7 @@ module.exports = class RemoveReactionRoleCommand extends BaseCommand {
 
           await message.channel.bulkDelete(4);
           MessageInfo.setTitle("Reaction Role Deleted!");
-          MessageInfo.setDescription("I have removed that emoji from my database.")
+          MessageInfo.setDescription("I have removed that emoji from my database.");
           
           message.channel.send(MessageInfo)
           .then(message => {
@@ -94,7 +94,7 @@ module.exports = class RemoveReactionRoleCommand extends BaseCommand {
     })
 
   }
-}
+};
 
 async function sendEmbed(reactionRoles, message, listEmbed1, listEmbed2) {
   if (reactionRoles.length < 20) {
@@ -104,4 +104,4 @@ async function sendEmbed(reactionRoles, message, listEmbed1, listEmbed2) {
     message.channel.send(listEmbed1);
     await message.channel.send(listEmbed2);
   }
-}
+};

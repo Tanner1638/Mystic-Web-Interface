@@ -9,4 +9,4 @@ module.exports = class PmCommand extends BaseCommand {
     //message.channel.send('pm command works');
     message.author.send("tiddy bish")
   }
-}
+};

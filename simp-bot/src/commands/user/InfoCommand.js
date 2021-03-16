@@ -21,9 +21,9 @@ module.exports = class InfoCommand extends BaseCommand {
     guilds.forEach( guild => {
       memberCount += guild.memberCount;
       serverCount += 1;
-    })
+    });
     infoEmbed.addField("Serving Count", `Serving ${memberCount} members in ${serverCount} servers.`);
 
     message.channel.send(infoEmbed);
   }
-}
+};

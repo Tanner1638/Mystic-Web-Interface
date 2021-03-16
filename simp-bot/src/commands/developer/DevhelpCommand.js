@@ -59,4 +59,4 @@ module.exports = class DevhelpCommand extends BaseCommand {
     message.channel.send(info1);
     message.channel.send(info2);
   }
-}
+};

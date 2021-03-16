@@ -14,7 +14,9 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
     super('messageReactionAdd');
   }
   async run (client, reaction, user) {
-    if(user.bot) return;
+    if(user.bot) {
+      return;
+    }
     
     guildCache.del(reaction.message.guild.id);
 
@@ -22,7 +24,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
     const emoji = reaction.emoji.toString();
     
     var server = guildCache.get(message.guild.id);
-    if(server == undefined){
+    if(server === undefined){
       
       const query = GuildConfig.where({ guildId: message.guild.id});
       await query.findOne(function (err, guild) {
@@ -48,7 +50,7 @@ module.exports = class MessageReactionAddEvent extends BaseEvent {
 function addRole(server, emoji, message, user) {
   const reactionRoles = server.reactionRoles;
   for (var i in reactionRoles) {
-    if (reactionRoles[i].emojiId == emoji && reactionRoles[i].messageId == message.id && (reactionRoles[i].type == 1 || reactionRoles[i].type == 2)) {
+    if (reactionRoles[i].emojiId === emoji && reactionRoles[i].messageId === message.id && (reactionRoles[i].type === 1 || reactionRoles[i].type === 2)) {
       const member = message.guild.member(user.id);
       member.roles.add(reactionRoles[i].role);
     }
