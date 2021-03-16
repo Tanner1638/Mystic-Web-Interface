@@ -15,13 +15,13 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
   run(client, message, args) {
 
     const info = new Discord.MessageEmbed()
-    .setColor('bf3f3f')
+    .setColor('bf3f3f');
     var Permissions = message.member.permissions;
     if(!(message.author.id === "542483559500218389")){
       if(!Permissions.has('EMBED_LINKS')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');
-        info.setDescription("you dont have permissions to send embed links.")
+        info.setDescription("you dont have permissions to send embed links.");
         message.channel.send(info)
         .then(message => {
           message.delete({ timeout: 5000});
@@ -49,7 +49,7 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       info.setFooter("Note: You dont need to include all of these fields listed in the example! If you just want an embed with a title and description, only include title: and desc: (interchangeable with other attributes too!)");
       return message.channel.send(info);
     }
-    if(args[0] != "debug"){
+    if(args[0] !== "debug"){
       message.channel.bulkDelete(1);
     }
     
@@ -114,7 +114,7 @@ module.exports = class CreateEmbedCommand extends BaseCommand {
       if (attribute[1] === -1) {
         orderedCollection = orderedCollection.slice(1);
       }
-    })
+    });
 
 
     for (var i = 0; i < orderedCollection.length; i++){

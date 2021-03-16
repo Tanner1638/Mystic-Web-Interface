@@ -23,7 +23,7 @@ module.exports = class SetPrefixCommand extends BaseCommand {
           message.delete({ timeout: 5000});
         })
         .catch(err => {
-          throw err
+          throw err;
         });
         return;
       }
@@ -31,12 +31,12 @@ module.exports = class SetPrefixCommand extends BaseCommand {
     
 
     const info = new Discord.MessageEmbed()
-      .setColor("bf3f3f")
+      .setColor("bf3f3f");
 
     if (!args[0]) {
       var guild = guildCache.get(message.guild.id);
       var prefix = guild.prefix;
-      info.setTitle("How To Set Prefix")
+      info.setTitle("How To Set Prefix");
       info.setDescription(`
       Say ${prefix}setPrefix or ${prefix}sp followed by the prefix youd like to set the bot prefix to!\n
       **Examples:**\n
@@ -45,7 +45,7 @@ module.exports = class SetPrefixCommand extends BaseCommand {
       -------Commands After Prefix Change-------\n
       **${prefix}setPrefix -** --> -help, -kick, -ban, -say...\n
       **${prefix}setPrefix bot!** --> bot!help, bot!kick, bot!ban, bot!say...\n
-      `)
+      `);
 
       message.channel.send(info);
     } else {
@@ -55,8 +55,8 @@ module.exports = class SetPrefixCommand extends BaseCommand {
 
       const guildObject = message.guild;
       const query = await GuildConfig.findOneAndUpdate({ guildId: guildObject.id}, {prefix: newPrefix});
-      info.setTitle("Prefix Changed!")
-      info.setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png")
+      info.setTitle("Prefix Changed!");
+      info.setThumbnail("https://cdn.discordapp.com/app-icons/755513775318368307/80b46437d91ca1fce94abc7f543cc833.png");
       info.setDescription(`
       The new prefix is: ${newPrefix}\n\n
       Examples:

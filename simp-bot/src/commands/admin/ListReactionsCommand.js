@@ -16,13 +16,13 @@ module.exports = class ListReactionsCommand extends BaseCommand {
       if(!Permissions.has('MANAGE_ROLES')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');
-        info.setDescription("you dont have permissions to manage roles.")
+        info.setDescription("you dont have permissions to manage roles.");
         message.channel.send(info)
         .then(message => {
           message.delete({ timeout: 5000});
         })
         .catch(err => {
-          throw err
+          throw err;
         });
         return;
       }

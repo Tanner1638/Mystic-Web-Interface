@@ -13,7 +13,7 @@ module.exports = class SayCommand extends BaseCommand {
 
   async run(client, message, args) {
     const info = new Discord.MessageEmbed()
-    .setColor('bf3f3f')
+    .setColor('bf3f3f');
 
     var Permissions = message.member.permissions;
     
@@ -21,13 +21,13 @@ module.exports = class SayCommand extends BaseCommand {
       if(!Permissions.has('ADMINISTRATOR')) {
         message.channel.bulkDelete(1);
         info.setTitle('Unauthorized Command.');
-        info.setDescription("you dont have administrator permissions to complete this action.")
+        info.setDescription("you dont have administrator permissions to complete this action.");
         message.channel.send(info)
         .then(message => {
           message.delete({ timeout: 5000});
         })
         .catch(err => {
-          throw err
+          throw err;
         });
         return;
       }

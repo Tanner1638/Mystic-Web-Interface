@@ -29,7 +29,7 @@ module.exports = class InviteRoleCommand extends BaseCommand {
           message.delete({ timeout: 5000});
         })
         .catch(err => {
-          throw err
+          throw err;
         });
         return;
       }

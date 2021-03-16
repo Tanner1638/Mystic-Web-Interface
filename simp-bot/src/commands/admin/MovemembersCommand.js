@@ -39,6 +39,6 @@ module.exports = class MovemembersCommand extends BaseCommand {
     const members = message.member.voice.channel.members;
     members.forEach(member => {
       message.guild.member(member).voice.setChannel(voiceChannel);
-    })
+    });
   }
-}
+};

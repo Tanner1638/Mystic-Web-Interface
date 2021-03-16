@@ -9,4 +9,4 @@ module.exports = class RestrictchannelCommand extends BaseCommand {
     message.channel.send('restrictchannel command works');
     
   }
-}
+};
